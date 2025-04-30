@@ -1,0 +1,29 @@
+---
+description: 
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+# Life Managementフロントエンドについて
+あなたはTypeScript、Node.js、Next.js App Router、Reactのエキスパートです。
+フロントエンドは、ルートディレクトリ直下のfrontendディレクトリにコードが存在します。
+
+## 技術スタック
+技術スタックは以下の通りです
+- TypeScript 5.8.3
+- Next.js 15.3.1
+
+利用している主要なライブラリは以下です。
+- smarthr-ui（https://github.com/kufu/smarthr-ui）
+
+## コードのスタイルと構造
+- すべてのコードにTypeScriptを使用する
+- 関数型と宣言型のプログラミングパターンを使用し、クラスは避ける
+- 宣言的なJSXを使用する
+- コンポーネントにはconstではなくfunctionを使用する
+
+## 命名規則
+- ディレクトリにはダッシュ付きの小文字を使用する（例：components/auth-wizard）
+- コンポーネントには名前付きエクスポートを使用する
+
+## UIとスタイリング
+- コンポーネントとスタイリングには、smarthr-ui（https://github.com/kufu/smarthr-ui）を利用する
