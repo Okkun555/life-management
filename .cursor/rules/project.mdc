@@ -15,9 +15,20 @@ alwaysApply: true
 - Ruby 3.4.2
 - Ruby on Rails 7.2.2.1
 
+利用しているライブラリは以下の通りです。
+
 
 ### フロントエンド
 フロントエンドは、ルートディレクトリ直下のfrontendディレクトリにコードが存在します。
 技術スタックは以下の通りです。
 - TypeScript 5.8.3
 - Next.js 15.3.1
+
+利用している主要なライブラリは以下です。
+- smarthr-ui（https://github.com/kufu/smarthr-ui）
+
+## データベース
+- PostgreSQL 16
+
+## ドキュメント
+- 機能実装する際の仕様などドキュメント周りがルートディレクトリ直下のdocディレクトリに存在します。
