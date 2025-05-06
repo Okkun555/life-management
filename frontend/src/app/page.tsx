@@ -5,12 +5,6 @@ export default function Home() {
   return (
     <Base>
       <div className="flex flex-col min-h-screen">
-        <div className="custom-header">
-          <Header>
-            <Text weight="bold" size="L" >Life Management</Text>
-          </Header>
-        </div>
-
         <main className="p-8 max-w-5xl mx-auto flex-grow">
           <div className="py-16 text-center">
             <Text weight="bold" size="XXL" className="mb-4">
