@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface TaskFormProps {
   onAddTask: (title: string) => void;
 }
 
 export function TaskForm({ onAddTask }: TaskFormProps) {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (title.trim() !== '') {
+    if (title.trim() !== "") {
       onAddTask(title.trim());
-      setTitle('');
+      setTitle("");
     }
   };
 

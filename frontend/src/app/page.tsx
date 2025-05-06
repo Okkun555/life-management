@@ -1,5 +1,5 @@
-import { Base, Header, Button, Text, Stack, Cluster } from 'smarthr-ui'
-import Link from 'next/link'
+import { Base, Button, Text, Stack, Cluster } from "smarthr-ui";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -66,5 +66,5 @@ export default function Home() {
         </footer>
       </div>
     </Base>
-  )
+  );
 }

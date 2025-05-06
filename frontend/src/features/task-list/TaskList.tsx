@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Task } from './Task';
-import { TaskForm } from './TaskForm';
-import { TaskItem } from '@/types/task';
+import { useState } from "react";
+import { Task } from "./Task";
+import { TaskForm } from "./TaskForm";
+import { TaskItem } from "@/types/task";
 
 export function TaskList() {
   // モックデータ
   const [tasks, setTasks] = useState<TaskItem[]>([
-    { id: '1', title: '買い物に行く', completed: false },
-    { id: '2', title: 'レポートを書く', completed: true },
-    { id: '3', title: '部屋の掃除', completed: false },
+    { id: "1", title: "買い物に行く", completed: false },
+    { id: "2", title: "レポートを書く", completed: true },
+    { id: "3", title: "部屋の掃除", completed: false },
   ]);
 
   // タスクの追加

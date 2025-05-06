@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import type { TaskItem } from '@/types/task';
-import { useState } from 'react';
+import type { TaskItem } from "@/types/task";
+import { useState } from "react";
 
 
 
@@ -17,23 +17,23 @@ export function Task({ task, onDelete, onEdit, onToggleComplete }: TaskProps) {
   const [editedTitle, setEditedTitle] = useState(task.title);
 
   const handleEdit = () => {
-    if (editedTitle.trim() !== '') {
+    if (editedTitle.trim() !== "") {
       onEdit(task.id, editedTitle);
       setIsEditing(false);
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleEdit();
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       setIsEditing(false);
       setEditedTitle(task.title);
     }
   };
 
   return (
-    <div className={`task-item p-4 mb-2 border rounded flex items-center ${task.completed ? 'bg-gray-100' : ''}`}>
+    <div className={`task-item p-4 mb-2 border rounded flex items-center ${task.completed ? "bg-gray-100" : ""}`}>
       <input
         type="checkbox"
         checked={task.completed}
@@ -53,7 +53,7 @@ export function Task({ task, onDelete, onEdit, onToggleComplete }: TaskProps) {
         />
       ) : (
         <span 
-          className={`flex-grow ${task.completed ? 'line-through text-gray-500' : ''}`}
+          className={`flex-grow ${task.completed ? "line-through text-gray-500" : ""}`}
           onClick={() => setIsEditing(true)}
         >
           {task.title}

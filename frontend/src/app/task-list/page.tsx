@@ -1,8 +1,8 @@
-import { TaskList } from '@/features/task-list/TaskList';
+import { TaskList } from "@/features/task-list/TaskList";
 
 export const metadata = {
-  title: 'タスクリスト | Life Management',
-  description: 'タスクの一覧を管理するページです',
+  title: "タスクリスト | Life Management",
+  description: "タスクの一覧を管理するページです",
 };
 
 export default function TaskListPage() {
