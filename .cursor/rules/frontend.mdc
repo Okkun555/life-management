@@ -14,6 +14,9 @@ alwaysApply: false
 
 利用している主要なライブラリは以下です。
 - smarthr-ui（https://github.com/kufu/smarthr-ui）
+- swr（https://github.com/vercel/swr）
+- react-hook-form（https://github.com/react-hook-form/react-hook-form）
+- zod（https://github.com/colinhacks/zod）
 
 ## コードのスタイルと構造
 - すべてのコードにTypeScriptを使用する
@@ -27,6 +30,8 @@ alwaysApply: false
 
 ## UIとスタイリング
 - コンポーネントとスタイリングには、smarthr-ui（https://github.com/kufu/smarthr-ui）を利用する
+
+## 実装のルール
 
 ## ディレクトリ構成
 ├── app           ... ルーティングに関するコンポーネント
