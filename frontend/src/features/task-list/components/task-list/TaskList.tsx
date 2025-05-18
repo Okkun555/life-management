@@ -13,8 +13,8 @@ export function TaskList() {
   return (
     <div>
       <form>
-        <FormControl title="タスク">
-          <Input type="text" />
+        <FormControl title="Task">
+          <Input name="task" type="text"  />
         </FormControl>
       </form>
     </div>

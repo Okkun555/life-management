@@ -47,8 +47,19 @@ const StyledHeader = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  /* ブラウザのデフォルトスタイルをリセット */
+  &::before, &::after {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -56,7 +67,8 @@ const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
+  margin: 0;
 `;
 
 const Logo = styled(Link)`
@@ -65,7 +77,7 @@ const Logo = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   transition: opacity 0.2s ease;
-  margin-left: 1rem;
+  margin-left: 16px;
   
   &:hover {
     opacity: 0.9;
@@ -80,7 +92,7 @@ const NavList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-right: 1rem;
+  margin-right: 16px;
 `;
 
 const NavItem = styled.li``;
