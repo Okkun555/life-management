@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./Header";
+import styled from "styled-components";
 
 /**
  * ヘッダーコンポーネント
@@ -15,12 +16,16 @@ const meta: Meta<typeof Header> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-full">
+      <Container>
         <Story />
-      </div>
+      </Container>
     ),
   ],
 };
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 export default meta;
 type Story = StoryObj<typeof Header>;

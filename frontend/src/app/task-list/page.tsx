@@ -1,4 +1,4 @@
-import { TaskList } from "@/features/task-list/TaskList";
+import { TaskList } from "@/features/task-list/components/task-list";
 
 export const metadata = {
   title: "タスクリスト | Life Management",
