@@ -12,11 +12,12 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "next": "15.3.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.3",
-    "smarthr-ui": "^70.2.0",
+    "smarthr-ui": "^70.3.0",
     "styled-components": "^5.3.11",
     "swr": "^2.3.3",
     "zod": "^3.24.4"

@@ -3,6 +3,12 @@ description:
 globs: *.tsx,*.ts
 alwaysApply: false
 ---
+---
+description: フロントエンドに関するCursor Rules
+globs: ./frontend/
+alwaysApply: false
+---
+
 # Life Managementフロントエンドについて
 あなたはTypeScript、Node.js、Next.js App Router、Reactのエキスパートです。
 フロントエンドは、ルートディレクトリ直下のfrontendディレクトリにコードが存在します。
@@ -24,14 +30,15 @@ alwaysApply: false
 - 宣言的なJSXを使用する
 - コンポーネントにはconstではなくfunctionを使用する
 
+## 実装のルール
+- ```*.tsx```には"use client"を最初に記述する
+
 ## 命名規則
 - ディレクトリにはダッシュ付きの小文字を使用する（例：components/auth-wizard）
 - コンポーネントには名前付きエクスポートを使用する
 
 ## UIとスタイリング
 - コンポーネントとスタイリングには、smarthr-ui（https://github.com/kufu/smarthr-ui）を利用する
-
-## 実装のルール
 
 ## ディレクトリ構成
 ├── app           ... ルーティングに関するコンポーネント
