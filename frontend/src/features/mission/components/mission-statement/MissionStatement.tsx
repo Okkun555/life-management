@@ -22,7 +22,7 @@ export function MissionStatement() {
   
   useEffect(() => {
     setIsMounted(true);
-    setIsOpen(true);
+    setIsOpen(false);
   }, []);
   
   const { 
