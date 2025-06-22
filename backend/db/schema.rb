@@ -10,8 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_22_002717) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "mission_statement_contents", force: :cascade do |t|
+    t.bigint "mission_statement_id", null: false
+    t.text "content", null: false, comment: "ミッションステートメント内容"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_statement_id"], name: "index_mission_statement_contents_on_mission_statement_id"
+  end
+
+  create_table "mission_statements", force: :cascade do |t|
+    t.string "name", null: false, comment: "ミッションステートメント名"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_mission_statements_on_name", unique: true
+  end
+
+  add_foreign_key "mission_statement_contents", "mission_statements"
 end
