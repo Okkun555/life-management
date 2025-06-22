@@ -54,12 +54,12 @@ Notionで以下の目標を記録している
 ### システムデザイン・アーキテクチャ
 #### データベース
 mission_statementsテーブル
-| 論理名     | 物理名     | データ型 | デフォルト        | null許可 | Key | 備考 |
-| ---------- | ---------- | -------- | ----------------- | -------- | --- | ---- |
-| id         | id         | int      |                   |          | PK  |      |
-| ユーザーID | user_id    | int      |                   |          | FK  |      |
-| 作成日時   | created_at | datetime | CURRENT_TIMESTAMP |          |     |      |
-| 更新日時   | updated_at | datetime | CURRENT_TIMESTAMP |          |     |      |
+| 論理名   | 物理名     | データ型     | デフォルト        | null許可 | Key | 備考 |
+| -------- | ---------- | ------------ | ----------------- | -------- | --- | ---- |
+| id       | id         | int          |                   |          | PK  |      |
+| 名前     | name       | varchar(100) |                   |          |     |      |
+| 作成日時 | created_at | datetime     | CURRENT_TIMESTAMP |          |     |      |
+| 更新日時 | updated_at | datetime     | CURRENT_TIMESTAMP |          |     |      |
 
 
 mission_statement_contentsテーブル
