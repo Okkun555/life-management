@@ -13,13 +13,33 @@ alwaysApply: true
 ## はじめに
 - いずれかルール(.cursor/rules/*)が読み込まれた場合、必ず「[?.mdc, ?.mdc] を参照しました！」とmdc名をカンマ区切りで一言一句変えずに出力してください
 
-## プロジェクトの構成
-### バックエンド
-```./backend```ディレクトリ以下にバックエンドのコードが存在します。
-### フロントエンド
-```./frontend```ディレクトリ以下にフロントエンドのコードが存在します。
+## 技術スタック
+### infrastructure
+- PostgreSQL
 
-### ドキュメント
-- 機能実装する際の仕様が```./documents/specifications```ディレクトリに存在します。
+### backend
+- Ruby 3.4.2
+- Ruby on Rails 7.2.2.1
+
+#### 利用中の主なGem
+- jbundler
+
+### frontend
+- TypeScript 5.8.3
+- Next.js 15.3.1
+
+#### 利用中のフロントエンドライブラリ
+- smarthr-ui（https://github.com/kufu/smarthr-ui）
+- swr（https://github.com/vercel/swr）
+- react-hook-form（https://github.com/react-hook-form/react-hook-form）
+- zod（https://github.com/colinhacks/zod）
+
+## プロジェクトのディレクトリ構成
+```
+├── backend //  backendのRuby on Railsコード
+├── docker-compose.yml
+├── documents // 仕様ドキュメント
+└── frontend // frontendのNextコード
+```
 
 

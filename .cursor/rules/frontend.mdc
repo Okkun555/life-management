@@ -13,11 +13,6 @@ alwaysApply: false
 あなたはTypeScript、Node.js、Next.js App Router、Reactのエキスパートです。
 フロントエンドは、ルートディレクトリ直下のfrontendディレクトリにコードが存在します。
 
-## 技術スタック
-技術スタックは以下の通りです
-- TypeScript 5.8.3
-- Next.js 15.3.1
-
 利用している主要なライブラリは以下です。
 - smarthr-ui（https://github.com/kufu/smarthr-ui）
 - swr（https://github.com/vercel/swr）
@@ -41,12 +36,3 @@ alwaysApply: false
 - コンポーネントとスタイリングには、smarthr-ui（https://github.com/kufu/smarthr-ui）を利用する
 
 ## ディレクトリ構成
-├── app           ... ルーティングに関するコンポーネント
-├── features      ... ロジック + コンポーネントをまとめたもの
-│   ├── task-list ... TODO管理に関するコンポーネントをまとめたもの
-│   └── routes    ... 特定のページで使うもの
-├── components    ... ロジックがない共通コンポーンネント
-├── hooks         ... 共通ロジックの内、React Hooksが「ある」もの
-├── utils         ... 共通ロジックの内、React Hooksが「ない」もの
-├── types         ... 型定義ファイル
-└── constants     ... 定数を定義したファイル
