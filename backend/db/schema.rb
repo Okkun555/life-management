@@ -10,13 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_27_135231) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_05_111852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "mission_statements", force: :cascade do |t|
-    t.text "content", null: false, comment: "ミッションステートメント"
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false, comment: "アカウント名"
+    t.string "email", null: false, comment: "メールアドレス"
+    t.string "supabase_uid", null: false, comment: "supabaseのuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["supabase_uid"], name: "index_users_on_supabase_uid", unique: true
   end
 end
