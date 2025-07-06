@@ -4,13 +4,11 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
-    if Rails.env.development? && authenticate_with_stub
-      return
-    end
+    return if Rails.env.development? && authenticate_with_stub
 
     authenticate_with_jwt
   end
-  
+
   # 開発環境用のスタブ認証
   def authenticate_with_stub
     uid = request.headers['X-Dev-User-UID']
@@ -20,9 +18,9 @@ class ApplicationController < ActionController::API
 
     if @current_user.nil?
       render json: {
-        error: "Development Stub: User with UID '#{uid}' not found." 
+        error: "Development Stub: User with UID '#{uid}' not found."
       }, status: :unauthorized
-    else 
+    else
       true
     end
   end
