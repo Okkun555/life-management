@@ -15,4 +15,10 @@ class User < ApplicationRecord
       )
     end
   end
+
+  def self.reset_previous_current_todo_lists
+    find_each do |user|
+      user.todo_lists.where(is_current: true).update_all(is_current: false)
+    end
+  end
 end

@@ -53,4 +53,22 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.reset_previous_current_todo_lists' do
+    let(:today) { Date.current.strftime('%Y-%m-%d') }
+    let!(:user1) { create(:user) }
+    let!(:user2) { create(:user) }
+
+    before do
+      create(:todo_list, author: user1, title: today)
+      create(:todo_list, author: user2, title: today)
+    end
+
+    it '前日のTodoListのis_currentをfalseに設定する' do
+      User.reset_previous_current_todo_lists
+
+      expect(user1.todo_lists.find_by(title: today).is_current).to be false
+      expect(user2.todo_lists.find_by(title: today).is_current).to be false
+    end
+  end
 end
