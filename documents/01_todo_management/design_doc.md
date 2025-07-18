@@ -14,18 +14,24 @@
 
 ## テーブル設計
 ### todo_listsテーブル
-| 論理名   | 物理名     | データ型 | デフォルト        | null許可 | キー | 備考 |
-| -------- | ---------- | -------- | ----------------- | -------- | ---- | ---- |
-| ID       | id         | bigint   |                   |          | PK   |      |
-| タイトル | title      | varchar  |                   |          |      |      |
-| 作成日時 | created_at | datetime | CURRENT_TIMESTAMP |          |      |      |
-| 更新日時 | updated_at | datetime | CURRENT_TIMESTAMP | ⚪︎     |      |      |
+| 論理名     | 物理名     | データ型 | デフォルト        | null許可 | キー | 備考       |
+| ---------- | ---------- | -------- | ----------------- | -------- | ---- | ---------- |
+| ID         | id         | bigint   |                   |          | PK   |            |
+| ユーザーID | user_id    | bigint   |                   |          | FK   |            |
+| タイトル   | title      | varchar  |                   |          |      |            |
+| 有効判定   | is_current | boolean  | false             |          |      | 当日有効なリストかどうか |
+| 作成日時   | created_at | datetime | CURRENT_TIMESTAMP |          |      |            |
+| 更新日時   | updated_at | datetime | CURRENT_TIMESTAMP | ⚪︎     |      |            |
+
+#### 制約
+- 同一ユーザーで同タイトルのTODOリストは作成できない
 
 ### todo_itemsテーブル
 | 論理名       | 物理名       | データ型     | デフォルト        | null許可 | キー | 備考              |
 | ------------ | ------------ | ------------ | ----------------- | -------- | ---- | ----------------- |
 | ID           | id           | bigint       |                   |          | PK   |                   |
-| TODOリストID | todo_list_id | bigint       |                   |          | FK   |                   |
+| TODOリストID | todo_list_id | bigint       |                   |          | FK   |  
+| ユーザーID | user_id    | bigint   |                   |          | FK |      |                 |
 | 内容         | content      | varchar(140) |                   |          |      |                   |
 | ステータス   | status       | smallint     | 1                 |          |      | 1: 未完了, 2:完了 |
 | 作成日時     | created_at   | datetime     | CURRENT_TIMESTAMP |          |      |                   |
@@ -36,9 +42,13 @@
 | ------------ | ------------ | -------- | ---------- | -------- | ---- | ---- |
 | ID           | id           | bigint   |            |          | PK   |      |
 | TODOリストID | todo_list_id | bigint   |            |          | FK   |      |
+| ユーザーID | user_id    | bigint   |                   |          | FK |      |
 | 振り返り     | review       | text     |            |          |      |      |
 | 作成日時 | created_at | datetime | CURRENT_TIMESTAMP |          |      |      |
 | 更新日時 | updated_at | datetime | CURRENT_TIMESTAMP | ⚪︎     |      |      |
+
+#### 制約
+- 同一TODOリストには1つの振り返りのみつけられる
 
 #### メモ
 - よりシンプルに```todo_lists_table```に振り返りコメントカラムを持たせる事も考えたが、登録タイミングが別ものになるので正規化した形で保持する。
