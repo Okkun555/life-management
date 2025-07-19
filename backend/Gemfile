@@ -7,6 +7,7 @@ gem 'puma', '>= 5.0'
 gem 'rack-cors'
 gem 'rails', '~> 7.2.2', '>= 7.2.2.1'
 gem 'tzinfo-data', platforms: %i[windows jruby]
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -26,6 +27,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-request_describer'
   gem 'faker'
+  gem 'rspec-request_describer'
 end

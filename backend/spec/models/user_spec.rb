@@ -16,21 +16,21 @@ RSpec.describe User, type: :model do
 
       it '各ユーザーに当日の日付でTodoListを作成する' do
         expect { User.create_daily_todo_lists }.to change(TodoList, :count).by(2)
-        
+
         expect(user1.todo_lists.find_by(title: today)).to be_present
         expect(user2.todo_lists.find_by(title: today)).to be_present
       end
 
       it '作成されるTodoListのis_currentがtrueになる' do
         User.create_daily_todo_lists
-        
+
         expect(user1.todo_lists.find_by(title: today).is_current).to be true
         expect(user2.todo_lists.find_by(title: today).is_current).to be true
       end
 
       it 'タイトルが正しい日付フォーマット（YYYY-MM-DD）になる' do
         User.create_daily_todo_lists
-        
+
         expect(user1.todo_lists.find_by(title: today).title).to eq today
         expect(user2.todo_lists.find_by(title: today).title).to eq today
       end
@@ -43,11 +43,11 @@ RSpec.describe User, type: :model do
 
       it '既存のユーザーには作成せず、新しいユーザーのみ作成する' do
         expect { User.create_daily_todo_lists }.to change(TodoList, :count).by(1)
-        
+
         # user1は既存のTodoListのまま
         expect(user1.todo_lists.where(title: today).count).to eq 1
         expect(user1.todo_lists.find_by(title: today)).to eq existing_todo_list
-        
+
         # user2には新しく作成される
         expect(user2.todo_lists.find_by(title: today)).to be_present
       end

@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   def self.reset_previous_current_todo_lists
     find_each do |user|
+      # パフォーマンス考慮 x is_currentは単純なbooleanなので、update_allを許容
+      # rubocop:disable Rails/SkipsModelValidations
       user.todo_lists.where(is_current: true).update_all(is_current: false)
     end
   end
