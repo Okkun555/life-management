@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
-    return if Rails.env.development? && authenticate_with_stub
+    return if (Rails.env.development? || Rails.env.test?) && authenticate_with_stub
 
     authenticate_with_jwt
   end
