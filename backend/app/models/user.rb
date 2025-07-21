@@ -2,6 +2,7 @@ class User < ApplicationRecord
   validates :supabase_uid, presence: true, uniqueness: true
 
   has_many :todo_lists, dependent: :destroy
+  has_many :todo_list_items, dependent: :destroy
 
   def self.create_daily_todo_lists
     formatted_date = Date.current.strftime('%Y-%m-%d')

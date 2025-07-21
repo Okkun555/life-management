@@ -28,5 +28,10 @@ module Backend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # ジェネレータの設定
+    config.generators do |g|
+      g.template_engine :jbuilder
+    end
   end
 end
