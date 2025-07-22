@@ -49,7 +49,7 @@ RSpec.describe "Api::TodoListItems", type: :request do
 
             response_json = JSON.parse(response.body)
             expect(response_json).to eq({
-              'errors' => ['Content can\'t be blank'] # TODO: エラーメッセージを修正する
+              'errors' => ['TODOを入力してください']
             })
           end
         end

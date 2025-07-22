@@ -7,7 +7,6 @@ class Api::TodoListItemsController < ApplicationController
     if @todo_list_item.save
       render :create, status: :created, location: api_todo_list_todo_list_item_url(@todo_list, @todo_list_item, format: :json)
     else
-      # TODO: エラー時のレスポンス返却方法を検討する
       render json: { errors: @todo_list_item.errors.full_messages }, status: :unprocessable_entity
     end
   end

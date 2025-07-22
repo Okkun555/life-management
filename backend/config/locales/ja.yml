@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      todo_list_item:
+        content: TODO
+        status: ステータス
