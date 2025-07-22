@@ -13,9 +13,25 @@ class Api::TodoListItemsController < ApplicationController
 
   def update
     @todo_list_item = @todo_list.todo_list_items.find(params[:id])
+    return head :not_found if @todo_list_item.nil?
 
     if @todo_list_item.update(todo_list_item_params)
       render :show, status: :ok, location: api_todo_list_todo_list_item_url(@todo_list, @todo_list_item, format: :json)
+    else
+      render json: { errors: @todo_list_item.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def update_status
+    
+  end
+
+  def destroy
+    @todo_list_item = @todo_list.todo_list_items.find(params[:id])
+    return head :not_found if @todo_list_item.nil?
+
+    if @todo_list_item.destroy
+      head :no_content
     else
       render json: { errors: @todo_list_item.errors.full_messages }, status: :unprocessable_entity
     end
