@@ -12,7 +12,6 @@ class ApplicationController < ActionController::API
   # 開発環境用のスタブ認証
   def authenticate_with_stub
     uid = request.headers['X-Dev-User-UID']
-    return false unless uid
 
     @current_user = User.find_by(supabase_uid: uid)
 

@@ -5,7 +5,17 @@ class Api::TodoListItemsController < ApplicationController
     @todo_list_item = @todo_list.todo_list_items.build(todo_list_item_params.merge(author: @current_user))
 
     if @todo_list_item.save
-      render :create, status: :created, location: api_todo_list_todo_list_item_url(@todo_list, @todo_list_item, format: :json)
+      render :show, status: :created, location: api_todo_list_todo_list_item_url(@todo_list, @todo_list_item, format: :json)
+    else
+      render json: { errors: @todo_list_item.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @todo_list_item = @todo_list.todo_list_items.find(params[:id])
+
+    if @todo_list_item.update(todo_list_item_params)
+      render :show, status: :ok, location: api_todo_list_todo_list_item_url(@todo_list, @todo_list_item, format: :json)
     else
       render json: { errors: @todo_list_item.errors.full_messages }, status: :unprocessable_entity
     end
