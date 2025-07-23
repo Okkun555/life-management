@@ -1,5 +1,7 @@
-class Api::TodoListItemsController < ApplicationController
-  before_action :set_todo_list
+# frozen_string_literal: true
+
+class Api::TodoListItemsController < Api::TodoListItemBaseController
+  before_action :set_todo_list_item, only: [:update, :destroy]
 
   def create
     @todo_list_item = @todo_list.todo_list_items.build(todo_list_item_params.merge(author: @current_user))
@@ -12,7 +14,6 @@ class Api::TodoListItemsController < ApplicationController
   end
 
   def update
-    @todo_list_item = @todo_list.todo_list_items.find(params[:id])
     return head :not_found if @todo_list_item.nil?
 
     if @todo_list_item.update(todo_list_item_params)
@@ -22,12 +23,7 @@ class Api::TodoListItemsController < ApplicationController
     end
   end
 
-  def update_status
-    
-  end
-
   def destroy
-    @todo_list_item = @todo_list.todo_list_items.find(params[:id])
     return head :not_found if @todo_list_item.nil?
 
     if @todo_list_item.destroy
@@ -41,9 +37,5 @@ class Api::TodoListItemsController < ApplicationController
 
   def todo_list_item_params
     params.require(:todo_list_item).permit(:content)
-  end
-
-  def set_todo_list
-    @todo_list ||= @current_user.todo_lists.find(params[:todo_list_id])
   end
 end
