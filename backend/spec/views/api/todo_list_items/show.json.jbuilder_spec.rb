@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "api/todo_list_items/show.json.jbuilder", type: :view do
+RSpec.describe 'api/todo_list_items/show.json.jbuilder', type: :view do
   let(:user) { create(:user) }
   let(:todo_list) { create(:todo_list, author: user) }
   let(:todo_list_item) { create(:todo_list_item, author: user, todo_list: todo_list) }
@@ -14,18 +14,18 @@ RSpec.describe "api/todo_list_items/show.json.jbuilder", type: :view do
     it '期待するレスポンスが返却される' do
       parsed_json = JSON.parse(rendered)
       expect(parsed_json).to eq({
-        'id' => todo_list_item.id,
-        'content' => todo_list_item.content,
-        'status' => todo_list_item.status,
-        'author' => {
-          'id' => user.id,
-          'name' => user.name
-        },
-        'todo_list' => {
-          'id' => todo_list.id,
-          'title' => todo_list.title
-        }
-      })
+                                  'id' => todo_list_item.id,
+                                  'content' => todo_list_item.content,
+                                  'status' => todo_list_item.status,
+                                  'author' => {
+                                    'id' => user.id,
+                                    'name' => user.name
+                                  },
+                                  'todo_list' => {
+                                    'id' => todo_list.id,
+                                    'title' => todo_list.title
+                                  }
+                                })
     end
   end
 end
