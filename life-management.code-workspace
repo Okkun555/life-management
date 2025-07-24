@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "Backend (Ruby on Rails)",
+      "path": "./backend"
+    },
+    {
+      "name": "Frontend (Next.js)",
+      "path": "./frontend"
+    },
+    {
+      "name": "Documents",
+      "path": "./documents"
+    }
+  ],
+  "settings": {
+    "rubyLsp.formatter": "rubocop",
+    "rubyLsp.enabledFeatures": {
+      "definition": true,
+      "completion": true,
+      "hover": true,
+      "workspaceSymbol": true
+    },
+    "ruby.useLanguageServer": true
+  },
+  "extensions": {
+    "recommendations": [
+      "shopify.ruby-lsp",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next"
+    ]
+  }
+} 
