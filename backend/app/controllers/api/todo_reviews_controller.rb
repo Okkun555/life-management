@@ -11,6 +11,17 @@ class Api::TodoReviewsController < ApplicationController
     end
   end
 
+  def update
+    return head :not_found if @set_todo_list.todo_review.nil?
+
+    @todo_review = @set_todo_list.todo_review
+    if @todo_review.update(todo_review_params)
+      render :show, status: :ok, location: api_todo_list_todo_review_url(@set_todo_list, @todo_review, format: :json)
+    else
+      render json: { errors: @todo_review.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def todo_review_params
