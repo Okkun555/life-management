@@ -4,3 +4,5 @@ ja:
       todo_list_item:
         content: TODO
         status: ステータス
+      todo_review:
+        review: 振り返り

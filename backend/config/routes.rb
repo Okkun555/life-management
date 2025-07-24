@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       resources :todo_list_items, only: [:create, :update, :destroy] do
         resource :status, only: [:update], controller: 'todo_list_item_statuses'
       end
+
+      resource :todo_review, only: [:create, :update]
     end
   end
 
