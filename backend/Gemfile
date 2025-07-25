@@ -9,6 +9,7 @@ gem 'rails', '~> 7.2.2', '>= 7.2.2.1'
 gem 'rails-i18n'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'whenever', require: false
+gem 'pundit'
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -25,6 +26,7 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruby-lsp'
+  gem 'ruby-lsp-rspec'
 end
 
 group :test do
