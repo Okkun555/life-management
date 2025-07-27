@@ -2,7 +2,8 @@ class Api::TodoReviewsController < ApplicationController
   before_action :set_todo_list
 
   def create
-    @todo_review = @set_todo_list.build_todo_review(todo_review_params.merge(author: @current_user))
+    authorize TodoReview
+    @todo_review = @set_todo_list.build_todo_review(todo_review_params.merge(author: current_user))
 
     if @todo_review.save
       render :show, status: :created, location: api_todo_list_todo_review_url(@set_todo_list, @todo_review, format: :json)
@@ -12,9 +13,10 @@ class Api::TodoReviewsController < ApplicationController
   end
 
   def update
+    @todo_review = @set_todo_list.todo_review
+
     return head :not_found if @set_todo_list.todo_review.nil?
 
-    @todo_review = @set_todo_list.todo_review
     if @todo_review.update(todo_review_params)
       render :show, status: :ok, location: api_todo_list_todo_review_url(@set_todo_list, @todo_review, format: :json)
     else

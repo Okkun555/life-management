@@ -114,6 +114,28 @@ RSpec.describe 'Api::TodoReviews', type: :request do
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
+
+      context 'レビュー作成したユーザーと異なるユーザーがリクエストした場合' do
+        let(:params) { { todo_review: { review: 'test' } } }
+        let(:other_user) { create(:user) }
+        let(:other_user_todo_list) { create(:todo_list, author: other_user) }
+        let(:headers) do
+          {
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'X-Dev-User-UID' => other_user.supabase_uid
+          }
+        end
+
+        before do
+          other_user_todo_list
+        end
+
+        it 'ステータスコード404を返す' do
+          subject
+          expect(response).to have_http_status(:not_found)
+        end
+      end
     end
   end
 end

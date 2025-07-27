@@ -4,6 +4,7 @@ class Api::TodoListItemsController < Api::TodoListItemBaseController
   before_action :set_todo_list_item, only: [:update, :destroy]
 
   def create
+    authorize TodoListItem
     @todo_list_item = @todo_list.todo_list_items.build(todo_list_item_params.merge(author: @current_user))
 
     if @todo_list_item.save
