@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Api::TodoReviews', type: :request do
@@ -6,13 +8,8 @@ RSpec.describe 'Api::TodoReviews', type: :request do
       let(:user) { create(:user) }
       let(:todo_list) { create(:todo_list, author: user) }
       let(:todo_list_id) { todo_list.id }
-      let(:headers) do
-        {
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json',
-          'X-Dev-User-UID' => user.supabase_uid
-        }
-      end
+
+      before { login(user) }
 
       context '正常なリクエストの場合' do
         let(:params) { { todo_review: { review: 'test' } } }

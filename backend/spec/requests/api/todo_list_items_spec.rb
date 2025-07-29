@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Api::TodoListItems', type: :request do
@@ -6,13 +8,8 @@ RSpec.describe 'Api::TodoListItems', type: :request do
       let(:user) { create(:user) }
       let(:todo_list) { create(:todo_list, author: user) }
       let(:todo_list_id) { todo_list.id }
-      let(:headers) do
-        {
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json',
-          'X-Dev-User-UID' => user.supabase_uid
-        }
-      end
+
+      before { login(user) }
 
       context '正常なリクエストの場合' do
         let(:params) { { todo_list_item: { content: 'test' } } }
@@ -71,13 +68,8 @@ RSpec.describe 'Api::TodoListItems', type: :request do
       let(:todo_list_item) { create(:todo_list_item, author: user, todo_list: todo_list) }
       let(:todo_list_id) { todo_list.id }
       let(:todo_list_item_id) { todo_list_item.id }
-      let(:headers) do
-        {
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json',
-          'X-Dev-User-UID' => user.supabase_uid
-        }
-      end
+
+      before { login(user) }
 
       context '正常なリクエストの場合' do
         let(:params) { { todo_list_item: { content: 'update content' } } }
@@ -148,15 +140,9 @@ RSpec.describe 'Api::TodoListItems', type: :request do
       let(:todo_list_item) { create(:todo_list_item, author: user, todo_list: todo_list) }
       let(:todo_list_id) { todo_list.id }
       let(:todo_list_item_id) { todo_list_item.id }
-      let(:headers) do
-        {
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json',
-          'X-Dev-User-UID' => user.supabase_uid
-        }
-      end
 
       before do
+        login(user)
         todo_list_item
       end
 

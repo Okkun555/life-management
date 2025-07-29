@@ -10,13 +10,8 @@ RSpec.describe 'Api::TodoListItemStatuses', type: :request do
       let(:todo_list_item) { create(:todo_list_item, author: user, todo_list: todo_list, status: :pending) }
       let(:todo_list_id) { todo_list.id }
       let(:todo_list_item_id) { todo_list_item.id }
-      let(:headers) do
-        {
-          'Accept' => 'application/json',
-          'Content-Type' => 'application/json',
-          'X-Dev-User-UID' => user.supabase_uid
-        }
-      end
+
+      before { login(user) }
 
       context '正常なリクエストの場合' do
         let(:params) { { status: 'completed' } }
