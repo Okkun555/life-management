@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :todo_list do
-    title { '2025-07-18' }
+    title { Faker::Date.between(from: 10.days.ago, to: Time.zone.today).strftime('%Y/%m/%d') }
     is_current { true }
 
     association :author, factory: :user
