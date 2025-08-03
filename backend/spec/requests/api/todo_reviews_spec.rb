@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::TodoReviews', type: :request do
+RSpec.describe 'Api::TodoList::TodoReviews', type: :request do
   describe 'POST /api/todo_lists/:todo_list_id/todo_review' do
     context 'ログイン済みの場合' do
       let(:user) { create(:user) }

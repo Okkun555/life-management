@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'api/todo_list_items/show.json.jbuilder', type: :view do
+RSpec.describe 'api/todo_lists/todo_list_items/show.json.jbuilder', type: :view do
   let(:user) { create(:user) }
   let(:todo_list) { create(:todo_list, author: user) }
   let(:todo_list_item) { create(:todo_list_item, author: user, todo_list: todo_list) }

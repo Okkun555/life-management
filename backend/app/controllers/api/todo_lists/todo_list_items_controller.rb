@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Api::TodoListItemsController < Api::TodoListItemBaseController
+class Api::TodoLists::TodoListItemsController < Api::TodoLists::TodoListItemBaseController
+  before_action :set_todo_list, only: [:create, :update, :destroy]
   before_action :set_todo_list_item, only: [:update, :destroy]
 
   def create
@@ -38,5 +39,9 @@ class Api::TodoListItemsController < Api::TodoListItemBaseController
 
   def todo_list_item_params
     params.require(:todo_list_item).permit(:content)
+  end
+
+  def set_todo_list_item
+    @todo_list_item ||= @todo_list.todo_list_items.find(params[:id])
   end
 end

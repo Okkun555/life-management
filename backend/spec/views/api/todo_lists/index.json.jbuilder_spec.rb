@@ -28,7 +28,6 @@ RSpec.describe 'api/todo_lists/index.json.jbuilder', type: :view do
                                     'name' => user.name
                                   },
                                   'is_current' => todo_list1.is_current,
-                                  'created_at' => todo_list1.created_at.strftime('%Y/%m/%d %H:%M:%S'),
                                   'todo_list_items' => [
                                     {
                                       'id' => todo_list_item1.id,
@@ -50,7 +49,6 @@ RSpec.describe 'api/todo_lists/index.json.jbuilder', type: :view do
                                     'name' => user.name
                                   },
                                   'is_current' => todo_list2.is_current,
-                                  'created_at' => todo_list2.created_at.strftime('%Y/%m/%d %H:%M:%S'),
                                   'todo_list_items' => []
                                 }
                               ])
