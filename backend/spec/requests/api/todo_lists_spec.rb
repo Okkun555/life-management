@@ -42,6 +42,7 @@ RSpec.describe 'Api::TodoLists', type: :request do
 
       it '本人のTODOリストと200ステータスが返却される' do
         subject
+        expect(response).to have_http_status(:ok)
         expect(response.parsed_body).to eq([
                                              {
                                                'id' => todo_list2.id,
