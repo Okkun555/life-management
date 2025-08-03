@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'api/todo_list_items/show.json.jbuilder', type: :view do

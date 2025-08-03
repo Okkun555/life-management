@@ -5,5 +5,7 @@ class Api::TodoListsController < ApplicationController
   end
 
   def show
+    @todo_list = TodoList.preload(:author, :todo_list_items).find(params[:id])
+    render :show, status: :ok
   end
 end

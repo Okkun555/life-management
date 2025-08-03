@@ -1,5 +1,4 @@
 json.extract! api_todo_list, :id, :title, :is_current
-json.created_at format_datetime(api_todo_list.created_at)
 json.author do
   json.extract! api_todo_list.author, :id, :name
 end

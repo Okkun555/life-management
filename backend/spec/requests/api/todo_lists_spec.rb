@@ -3,13 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::TodoLists', type: :request do
+  let(:user) { create(:user) }
+
+  before { login(user) }
+
   describe 'GET /api/todo_lists' do
     let(:other_user) { create(:user) }
-    let(:user) { create(:user) }
 
     before do
-      login(user)
-
       create(:todo_list, title: '他人のTODOリスト1', author: other_user)
       create(:todo_list_item, content: '他人のやること1', author: other_user)
     end
@@ -52,7 +53,6 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                                  'name' => user.name
                                                },
                                                'is_current' => todo_list2.is_current,
-                                               'created_at' => todo_list2.created_at.strftime('%Y/%m/%d %H:%M:%S'),
                                                'todo_list_items' => []
                                              },
                                              {
@@ -63,7 +63,6 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                                  'name' => user.name
                                                },
                                                'is_current' => todo_list1.is_current,
-                                               'created_at' => todo_list1.created_at.strftime('%Y/%m/%d %H:%M:%S'),
                                                'todo_list_items' => [
                                                  {
                                                    'id' => todo_list_item1.id,
@@ -79,6 +78,51 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                              }
                                            ])
       end
+    end
+  end
+
+  describe 'GET /api/todo_lists/:id' do
+    let(:target_todo_list) { create(:todo_list, title: '2025/07/18', author: user) }
+    let(:target_todo_list_item1) { create(:todo_list_item, content: 'やること1', author: user, todo_list: target_todo_list) }
+    let(:target_todo_list_item2) { create(:todo_list_item, content: 'やること2', author: user, todo_list: target_todo_list) }
+
+    let(:id) { target_todo_list.id }
+
+    before do
+      target_todo_list_item1
+      target_todo_list_item2
+
+      create(:todo_list_item, content: 'やること1', author: user, todo_list: create(:todo_list, title: '2025/07/19', author: user))
+
+      subject
+    end
+
+    it '200ステータスが返却される' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'TODOリストの詳細が返却される' do
+      expect(response.parsed_body).to eq({
+                                           'id' => target_todo_list.id,
+                                           'title' => target_todo_list.title,
+                                           'author' => {
+                                             'id' => user.id,
+                                             'name' => user.name
+                                           },
+                                           'is_current' => target_todo_list.is_current,
+                                           'todo_list_items' => [
+                                             {
+                                               'id' => target_todo_list_item1.id,
+                                               'content' => target_todo_list_item1.content,
+                                               'status' => target_todo_list_item1.status
+                                             },
+                                             {
+                                               'id' => target_todo_list_item2.id,
+                                               'content' => target_todo_list_item2.content,
+                                               'status' => target_todo_list_item2.status
+                                             }
+                                           ]
+                                         })
     end
   end
 end
