@@ -11,6 +11,10 @@
     {
       "name": "Documents",
       "path": "./documents"
+    },
+    {
+      "name": "Root",
+      "path": "."
     }
   ],
   "settings": {
