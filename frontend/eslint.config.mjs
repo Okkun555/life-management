@@ -23,7 +23,10 @@ const eslintConfig = [
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
       "indent": ["error", 2],
-      "no-unused-vars": "warn",
+      "no-unused-vars": ["warn", { 
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }],
       "no-console": "warn",
       // Import順序とソートのルール
       "import/order": [

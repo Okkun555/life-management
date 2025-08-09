@@ -1,31 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Box, Toolbar } from "@/components/mui";
 
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
 
-import type { SidebarType } from "./sidebar/Sidebar";
-
 type Props = {
   children: React.ReactNode;
 }
 
-const DRAWER_WIDTH = 240;
 const MINI_DRAWER_WIDTH = 64;
 
 export function LoggedInLayout({ children }: Props) {
-  const layoutRef = useRef<HTMLDivElement>(null);
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState<SidebarType>("mini");
-  const handleSidebarOpen= () => setIsSidebarOpen("full");
-  const handleSidebarClose = () => setIsSidebarOpen("mini");
+  const [isOpenSidebar, setIsOpenSidebar] = useState(true);
+  const handleChangeSidebar = (value: boolean) => setIsOpenSidebar(value);
 
   return (
     <Box
-      ref={layoutRef}
       sx={{
         position: "relative",
         display: "flex",
@@ -34,12 +27,8 @@ export function LoggedInLayout({ children }: Props) {
         width: "100%",
       }}
     >
-      <Header onMenuClick={handleSidebarOpen} />
-      <Sidebar 
-        container={layoutRef?.current ?? undefined} 
-        open={isSidebarOpen} 
-        onClose={handleSidebarClose} 
-      />
+      <Header isOpenSidebar={isOpenSidebar} handleChangeSidebar={handleChangeSidebar} />
+      {isOpenSidebar && <Sidebar />}
       <Box
         sx={{
           display: "flex",
@@ -48,7 +37,7 @@ export function LoggedInLayout({ children }: Props) {
           minWidth: 0,
           marginLeft: { 
             xs: 0, 
-            sm: isSidebarOpen ? `${DRAWER_WIDTH}px` : `${MINI_DRAWER_WIDTH}px`
+            sm: isOpenSidebar ? `${MINI_DRAWER_WIDTH}px` : undefined
           },
           transition: (theme) => theme.transitions.create(["margin"], {
             easing: theme.transitions.easing.sharp,

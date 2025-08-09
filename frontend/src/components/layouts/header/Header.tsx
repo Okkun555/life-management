@@ -3,10 +3,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { AppBar, IconButton, Toolbar, Typography } from "@/components/mui";
 
 type Props = {
-  onMenuClick: () => void;
+  isOpenSidebar: boolean;
+  handleChangeSidebar: (_: boolean) => void;
 }
 
-export function Header({ onMenuClick }: Props) {
+export function Header({ isOpenSidebar, handleChangeSidebar }: Props) {
   return (
     <>
       <AppBar position="fixed" sx={{ displayPrint: "none", zIndex: (theme) => theme.zIndex.drawer + 1 }} color="secondary">
@@ -15,7 +16,7 @@ export function Header({ onMenuClick }: Props) {
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={onMenuClick}
+            onClick={() => handleChangeSidebar(isOpenSidebar)}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
