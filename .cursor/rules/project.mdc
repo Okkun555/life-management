@@ -29,7 +29,7 @@ alwaysApply: true
 - Next.js 15.3.1
 
 #### 利用中のフロントエンドライブラリ
-- smarthr-ui（https://github.com/kufu/smarthr-ui）
+- mui(https://mui.com/)
 - swr（https://github.com/vercel/swr）
 - react-hook-form（https://github.com/react-hook-form/react-hook-form）
 - zod（https://github.com/colinhacks/zod）

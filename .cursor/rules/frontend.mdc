@@ -24,6 +24,8 @@ alwaysApply: false
 - 関数型と宣言型のプログラミングパターンを使用し、クラスは避ける
 - 宣言的なJSXを使用する
 - コンポーネントにはconstではなくfunctionを使用する
+- UIライブラリとしてMUIを利用します。
+- MUIを利用するときは`./frontend/components/mui/index.ts`内から呼び出します。
 
 ## 実装のルール
 - ```*.tsx```には"use client"を最初に記述する
