@@ -16,12 +16,47 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: {
+      import: (await import("eslint-plugin-import")).default
+    },
     rules: {
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
       "indent": ["error", 2],
       "no-unused-vars": "warn",
-      "no-console": "warn"
+      "no-console": "warn",
+      // Import順序とソートのルール
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",    // Node.js組み込みモジュール
+            "external",   // 外部ライブラリ
+            "internal",   // 内部の絶対パス
+            "parent",     // 親ディレクトリからの相対パス
+            "sibling",    // 同階層の相対パス
+            "index",      // indexファイル
+            "type"        // TypeScript type imports
+          ],
+          "pathGroups": [
+            {
+              "pattern": "@/**",
+              "group": "internal",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": ["type"],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          },
+          "distinctGroup": false,
+          "warnOnUnassignedImports": true
+        }
+      ],
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error"
     },
     linterOptions: {
       reportUnusedDisableDirectives: true,

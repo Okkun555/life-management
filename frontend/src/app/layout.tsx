@@ -1,9 +1,13 @@
-import "smarthr-ui/smarthr-ui.css";
-import type { Metadata } from "next";
+import { ThemeProvider } from "@mui/material/styles";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import { LoggedInLayout } from "@/components/layouts/LoggedInLayout";
+import theme from "@/libs/mui/theme";
+
 import "./globals.css";
-import { Header } from "@/components/layouts/header/Header";
-import { MainContainer } from "@/components/layouts/container";
+
+import type { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,15 +29,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="ja">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <MainContainer>
-          {children}
-        </MainContainer>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <LoggedInLayout>{children}</LoggedInLayout>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

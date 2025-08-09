@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+
+import { TaskItem } from "@/types/task";
+
 import { Task } from "./Task";
 import { TaskForm } from "./TaskForm";
-import { TaskItem } from "@/types/task";
+
 
 export function TaskList() {
   // モックデータ
