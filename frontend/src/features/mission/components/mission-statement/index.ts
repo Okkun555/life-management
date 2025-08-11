@@ -1,1 +1,0 @@
-export { MissionStatement } from "./MissionStatement";
