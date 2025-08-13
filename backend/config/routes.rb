@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :todo_lists, only: [:index, :show, :today_todo_list] do
+    resources :todo_lists, only: [:index, :show] do
+      collection do
+        get :latest
+      end
       scope module: :todo_lists do
         resources :todo_list_items, only: [:create, :update, :destroy] do
           resource :status, only: [:update], controller: 'todo_list_item_statuses'

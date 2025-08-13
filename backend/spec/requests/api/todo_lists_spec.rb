@@ -125,4 +125,66 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                          })
     end
   end
+
+  describe 'GET /api/todo_lists/latest' do
+    let(:todo_list1) { create(:todo_list, title: '2025/07/18', author: user, created_at: Time.zone.parse('2025/07/18 00:00:00')) }
+    let(:todo_list2) { create(:todo_list, title: '2025/07/19', author: user, created_at: Time.zone.parse('2025/07/19 00:00:00')) }
+
+    context '正常系' do
+      let(:current_todo_list) do
+        create(:todo_list, title: '2025/07/20', author: user, created_at: Time.zone.parse('2025/07/20 00:00:00'), is_current: true)
+      end
+      let(:todo_list_item1) { create(:todo_list_item, content: 'やること1', author: user, todo_list: current_todo_list) }
+      let(:todo_list_item2) { create(:todo_list_item, content: 'やること2', author: user, todo_list: current_todo_list) }
+
+      before do
+        todo_list_item1
+        todo_list_item2
+
+        create(:todo_list_item, content: 'やること3', author: user, todo_list: todo_list1)
+        create(:todo_list_item, content: 'やること4', author: user, todo_list: todo_list2)
+
+        subject
+      end
+
+      it '200ステータスが返却される' do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it '最新のTODOリストが返却される' do
+        expect(response.parsed_body).to eq({
+                                             'id' => current_todo_list.id,
+                                             'title' => current_todo_list.title,
+                                             'author' => {
+                                               'id' => user.id,
+                                               'name' => user.name
+                                             },
+                                             'is_current' => current_todo_list.is_current,
+                                             'todo_list_items' => [
+                                               {
+                                                 'id' => todo_list_item1.id,
+                                                 'content' => todo_list_item1.content,
+                                                 'status' => todo_list_item1.status
+                                               },
+                                               {
+                                                 'id' => todo_list_item2.id,
+                                                 'content' => todo_list_item2.content,
+                                                 'status' => todo_list_item2.status
+                                               }
+                                             ]
+                                           })
+      end
+    end
+
+    context '異常系' do
+      context '本日対象のTODOリストが存在しない場合' do
+        before { subject }
+
+        it '500ステータスが返却される' do
+          expect(response).to have_http_status(:internal_server_error)
+          expect(response.parsed_body).to eq({ 'error' => '予期せぬエラーが発生しました。管理者にお問い合わせください。' })
+        end
+      end
+    end
+  end
 end

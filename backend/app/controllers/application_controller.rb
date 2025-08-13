@@ -3,6 +3,8 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate_user!
 
+  rescue_from StandardError, with: :handle_standard_error
+
   attr_reader :current_user
 
   private
@@ -31,5 +33,9 @@ class ApplicationController < ActionController::API
   # JWTを使った認証
   def authenticate_with_jwt
     # 本番環境用のロジックを追加する
+  end
+
+  def handle_standard_error
+    render json: { error: '予期せぬエラーが発生しました。管理者にお問い合わせください。' }, status: :internal_server_error
   end
 end
