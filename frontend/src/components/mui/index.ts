@@ -3,10 +3,10 @@
 export { 
   AppBar, 
   Box, 
+  CircularProgress,
   Container, 
   Drawer, 
   IconButton,
-  LinearProgress,
   List, 
   ListItem, 
   ListItemButton, 

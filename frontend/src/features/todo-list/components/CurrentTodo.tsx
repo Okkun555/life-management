@@ -1,19 +1,20 @@
 "use client";
 
-import { Typography } from "@mui/material";
-import { Suspense } from "react";
-
+import { Typography, CircularProgress } from "@/components/mui";
 import { useFetchCurrentTodoList } from "@/hooks/api/todo-list/useTodoApi";
 
 
 export const CurrentTodo = () => {
-  const { todoList } = useFetchCurrentTodoList();
+  const { todoList, isLoading } = useFetchCurrentTodoList();
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <>
-        <Typography variant="h6">{todoList?.title}のTODO管理</Typography>
-      </>
-    </Suspense>
+    <>
+      <Typography variant="h5" component="h2">{todoList?.title}のTODO管理</Typography>
+    </>
+  
   );
 };
