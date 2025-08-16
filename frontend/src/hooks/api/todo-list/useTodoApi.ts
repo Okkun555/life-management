@@ -3,10 +3,14 @@
 import useSWR from "swr";
 
 import { TodoList } from "@/features/todo-list/types";
-import { fetcher } from "@/libs/fetcher";
+import { fetcher } from "@/libs/api/fetcher";
+import { path } from "@/libs/api/path";
 
-export const useFetchTodoList = (id: number) => {
-  const { data } = useSWR<TodoList>(`/todo_lists/${id}`, fetcher);
+export const useFetchCurrentTodoList = () => {
+  const { data, isLoading } = useSWR<TodoList>(path.currentTodoList, fetcher);
 
-  return { data };
+  return { 
+    todoList: data,
+    isLoading
+  };
 };

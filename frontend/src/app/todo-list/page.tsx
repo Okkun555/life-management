@@ -1,5 +1,5 @@
-import { CurrentTodo } from "@/features/todo-list/components/CurrentTodo";
+import { TodoList } from "@/features/todo-list/components/TodoList";
 
 export default function TodoListPage() {
-  return <CurrentTodo />;
+  return <TodoList />;
 }

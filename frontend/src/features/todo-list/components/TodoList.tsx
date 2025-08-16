@@ -1,9 +1,18 @@
 "use client";
 
-import { Typography } from "@mui/material";
+
+import { Box } from "@/components/mui";
+
+import { CurrentTodo } from "./CurrentTodo";
+import { TodoListTab } from "./TodoListTab";
 
 export const TodoList = () => {
   return (
-    <Typography>Todo管理</Typography>
+    <>
+      <TodoListTab />
+      <Box sx={{ mt: 2 }}>
+        <CurrentTodo />
+      </Box>
+    </>
   );
 };

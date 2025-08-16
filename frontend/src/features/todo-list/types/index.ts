@@ -1,6 +1,7 @@
 export type TodoList = {
   id: number;
   title: string;
+  todoListItems: Array<TodoItem>
 }
 
 export type TodoItem = {
@@ -10,6 +11,5 @@ export type TodoItem = {
   author: {
     id: number;
     name: string;
-  },
-  todoList: TodoList;
+  }
 }

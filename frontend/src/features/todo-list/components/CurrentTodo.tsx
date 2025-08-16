@@ -1,18 +1,19 @@
 "use client";
 
 import { Typography } from "@mui/material";
+import { Suspense } from "react";
 
-import { useFetchTodoList } from "@/hooks/api/todo-list/useTodoApi";
+import { useFetchCurrentTodoList } from "@/hooks/api/todo-list/useTodoApi";
 
 
 export const CurrentTodo = () => {
-  const { data } = useFetchTodoList(1);
-
-  console.log(data);
+  const { todoList } = useFetchCurrentTodoList();
 
   return (
-    <>
-      <Typography variant="h6">Current Todo</Typography>
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <>
+        <Typography variant="h6">{todoList?.title}のTODO管理</Typography>
+      </>
+    </Suspense>
   );
 };
