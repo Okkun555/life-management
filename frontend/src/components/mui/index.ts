@@ -14,6 +14,7 @@ export {
   ListItemText, 
   Tabs,
   Tab,
+  TextField,
   Toolbar, 
   Tooltip,
   Typography 
