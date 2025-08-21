@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { Box, Toolbar } from "@/components/mui";
 
-import { Header } from "./header";
-import { Sidebar } from "./sidebar";
+import { Header } from "@/components/header";
+import { Sidebar } from "@/components/sidebar";
 
 type Props = {
   children: React.ReactNode;

@@ -2,12 +2,13 @@ import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { LoggedInLayout } from "@/components/layouts/LoggedInLayout";
-import theme from "@/libs/mui/theme";
+import { LoggedInLayout } from "@/components/layouts/logged-in-layout";
+
 
 import "./globals.css";
 
 import type { Metadata } from "next";
+import { theme } from "@/libs/mui/theme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

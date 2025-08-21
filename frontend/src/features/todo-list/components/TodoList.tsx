@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Tabs } from "@/components/layouts/tabs";
+import { Tabs } from "@/components/tabs";
 import { Box } from "@/components/mui";
 
 import { AllTodoList } from "./AllTodoList";
