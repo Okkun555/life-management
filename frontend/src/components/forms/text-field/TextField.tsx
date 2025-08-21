@@ -1,25 +1,23 @@
-import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import { FieldWrapper } from "@/components/forms/field-wrapper"
+import { TextFieldProps as MuiTextFieldProps } from "@mui/material"
+import { TextField as MuiTextField } from "@/components/mui"
+import type { FieldWrapperPassThroughProps } from "@/components/forms/field-wrapper/FieldWrapper"
 
-import { TextField as MuiTextField } from "@/components/mui";
-
-type Props<T extends FieldValues> = {
-  label: string;
-  name: Path<T>;
-  control: Control<T>;
-  // errors: FieldErrors<T>;
+export type TextFieldProps = {
+  fieldWrapper: FieldWrapperPassThroughProps
+  muiTextField?: MuiTextFieldProps
+  
 }
 
-export const TextField = <T extends FieldValues>({ label, name, control}: Props<T>) => {
+/*
+MEMO:
+見た目にのみ関心を持つViewコンポーネント
+Storybookはこのコンポーネントに対してのみ実装する
+*/
+export const TextField = ({ fieldWrapper, muiTextField }: TextFieldProps) => {
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <MuiTextField 
-          {...field}
-          label={label}
-        />
-      )}
-    />
-  );
-};
+    <FieldWrapper {...fieldWrapper}>
+      <MuiTextField {...muiTextField} error={!!fieldWrapper.errorMessage} />
+    </FieldWrapper>
+  )
+}

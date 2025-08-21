@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 
-import { TextField } from "@/components/forms/text-field/TextField";
+import { TextFieldController } from "@/components/forms/text-field";
 import { Typography, CircularProgress } from "@/components/mui";
 import { useFetchCurrentTodoList } from "@/hooks/api/todo-list/useTodoApi";
 
@@ -10,7 +10,7 @@ import { useFetchCurrentTodoList } from "@/hooks/api/todo-list/useTodoApi";
 export const CurrentTodo = () => {
   const { todoList, isLoading } = useFetchCurrentTodoList();
 
-  const { control } = useForm({
+  const { register } = useForm({
     defaultValues: {
       content: ""
     }
@@ -23,8 +23,7 @@ export const CurrentTodo = () => {
   return (
     <>
       <Typography variant="h5" component="h2">{todoList?.title}のTODO管理</Typography>
-      
-      <TextField<{content: string}> label="TODO" name="content" control={control} />
+      <TextFieldController<{content: string}> registration={register("content")} textField={{ fieldWrapper: { label: "TODO" }  }} />
     </>
   
   );
