@@ -27,7 +27,7 @@ export const CurrentTodoList = ({ isLoading, todoList }: CurrentTodoListProps) =
   return (
     <>
       <Typography variant="h5" component="h2">
-        {todoList?.title}のTODO管理
+        {todoList.title}のTODO管理
       </Typography>
       <AddTodoForm todoListId={todoList.id} />
     </>

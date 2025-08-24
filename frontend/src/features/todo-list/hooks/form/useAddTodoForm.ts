@@ -15,13 +15,8 @@ export const useAddTodoForm = (todoListId: number) => {
   });
 
   const { trigger } = useAddTodoItem(todoListId);
-  const onSubmit = useCallback(
-    async (data: AddTodoFormValues) => {
-      const response = await trigger(data);
-      console.log(response);
-    },
-    [trigger],
-  );
+  // TODO: 楽観的更新処理を入れてみる？
+  const onSubmit = useCallback(async (data: AddTodoFormValues) => await trigger(data), [trigger]);
 
   return {
     register,
