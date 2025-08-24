@@ -1,7 +1,9 @@
-import { FieldWrapper } from "@/components/forms/field-wrapper"
-import { TextFieldProps as MuiTextFieldProps } from "@mui/material"
-import { TextField as MuiTextField } from "@/components/mui"
-import type { FieldWrapperPassThroughProps } from "@/components/forms/field-wrapper/FieldWrapper"
+import { TextFieldProps as MuiTextFieldProps } from "@mui/material";
+
+import { FieldWrapper } from "@/components/forms/field-wrapper";
+import { TextField as MuiTextField } from "@/components/mui";
+
+import type { FieldWrapperPassThroughProps } from "@/components/forms/field-wrapper/FieldWrapper";
 
 export type TextFieldProps = {
   fieldWrapper: FieldWrapperPassThroughProps
@@ -19,5 +21,5 @@ export const TextField = ({ fieldWrapper, muiTextField }: TextFieldProps) => {
     <FieldWrapper {...fieldWrapper}>
       <MuiTextField {...muiTextField} error={!!fieldWrapper.errorMessage} />
     </FieldWrapper>
-  )
-}
+  );
+};

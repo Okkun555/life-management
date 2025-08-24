@@ -1,7 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import { useState } from "react";
 
 import { Tabs } from ".";
-import { useState } from 'react';
+
+import type { Meta, StoryObj } from "@storybook/nextjs";
+
 
 
 const meta = {
@@ -25,6 +27,6 @@ export const Default: Story = {
   render: (args) => {
     const [selected, setSelected] = useState(args.selected);
 
-    return <Tabs {...args} selected={selected} handleChangeTab={(_, value) => setSelected(value)} />
+    return <Tabs {...args} selected={selected} handleChangeTab={(_, value) => setSelected(value)} />;
   },
 };

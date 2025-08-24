@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
-
 import { FieldWrapper } from ".";
+
+import type { Meta, StoryObj } from "@storybook/nextjs";
+
 
 const meta = {
   title: "Layouts/Forms/FieldWrapper",
@@ -17,7 +18,7 @@ export const Default: Story = {
     required: false,
     children: <div>テスト</div>,
   },
-}
+};
 
 export const Required: Story = {
   args: {
@@ -25,7 +26,7 @@ export const Required: Story = {
     required: true,
     children: <div>テスト</div>,
   },
-}
+};
 
 export const Error: Story = {
   args: {
@@ -34,4 +35,4 @@ export const Error: Story = {
     errorMessage: "エラーメッセージ",
     children: <div>テスト</div>,
   },
-}
+};

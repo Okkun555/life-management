@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 
-import { Box, Toolbar } from "@/components/mui";
-
 import { Header } from "@/components/header";
+import { Box, Toolbar } from "@/components/mui";
 import { Sidebar } from "@/components/sidebar";
 
 type Props = {

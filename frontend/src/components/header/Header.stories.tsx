@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
-
 import { Header } from ".";
+
+import type { Meta, StoryObj } from "@storybook/nextjs";
+
 
 const meta = {
   title: "Layouts/Header",
@@ -16,4 +17,4 @@ export const Default: Story = {
     isOpenSidebar: false,
     handleChangeSidebar: () => {},
   },
-}
+};

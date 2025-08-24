@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
-
 import { LoggedInLayout } from ".";
+
+import type { Meta, StoryObj } from "@storybook/nextjs";
+
 
 const meta = {
   title: "Layouts/LoggedInLayout",
@@ -15,4 +16,4 @@ export const Default: Story = {
   args: {
     children: <div>ここに各コンテンツが入ります。</div>,
   },
-}
+};
