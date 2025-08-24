@@ -7,7 +7,7 @@ type AddTodoFormProps = {
 };
 
 export const AddTodoForm = ({ todoListId }: AddTodoFormProps) => {
-  const { register, handleSubmit, onSubmit } = useAddTodoForm(todoListId);
+  const { register, handleSubmit, onSubmit, errors } = useAddTodoForm(todoListId);
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 2 }}>
@@ -16,7 +16,7 @@ export const AddTodoForm = ({ todoListId }: AddTodoFormProps) => {
         <Grid size={10}>
           <TextFieldController
             registration={register("content")}
-            textField={{ fieldWrapper: { label: "" } }}
+            textField={{ fieldWrapper: { label: "", errorMessage: errors.content?.message } }}
           />
         </Grid>
         <Grid size={2}>
