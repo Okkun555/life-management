@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
-import { Tabs } from "@/components/tabs";
 import { Box } from "@/components/mui";
+import { Tabs } from "@/components/tabs";
 
 import { AllTodoList } from "./AllTodoList";
-import { CurrentTodo } from "./CurrentTodo";
+import { CurrentTodoListAdapter } from "./current-todo-list";
 
 const todoListTabItems = {
   currentTodo: "本日のTODO",
@@ -24,7 +24,7 @@ export const TodoList = () => {
     <>
       <Tabs tabItems={todoListTabItems} selected={selected} handleChangeTab={handleChangeTab} />
       <Box sx={{ mt: 2 }}>
-        { selected === "currentTodo" && <CurrentTodo /> }
+        { selected === "currentTodo" && <CurrentTodoListAdapter /> }
         { selected === "all" && <AllTodoList /> }
       </Box>
     </>
