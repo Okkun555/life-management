@@ -6,7 +6,6 @@ class Api::TodoLists::TodoListItemStatusesController < Api::TodoLists::TodoListI
 
   def update
     return head :not_found if @todo_list_item.nil?
-
     unless TodoListItem.statuses.key?(params[:status])
       return render json: { errors: ['ステータスが不正です'] }, status: :unprocessable_entity
     end
@@ -23,6 +22,6 @@ class Api::TodoLists::TodoListItemStatusesController < Api::TodoLists::TodoListI
   private
 
   def set_todo_list_item
-    @todo_list_item ||= @todo_list.todo_list_items.find(params[:todo_list_item_id])
+    @todo_list_item ||= @todo_list.todo_list_items.find_by(id: params[:todo_list_item_id])
   end
 end

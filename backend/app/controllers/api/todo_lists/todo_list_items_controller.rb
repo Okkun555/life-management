@@ -42,6 +42,6 @@ class Api::TodoLists::TodoListItemsController < Api::TodoLists::TodoListItemBase
   end
 
   def set_todo_list_item
-    @todo_list_item ||= @todo_list.todo_list_items.find(params[:id])
+    @todo_list_item ||= @todo_list.todo_list_items.find_by(id: params[:id])
   end
 end
