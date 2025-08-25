@@ -19,13 +19,13 @@ RSpec.describe 'api/todo_lists/todo_list_items/show.json.jbuilder', type: :view 
                                   'id' => todo_list_item.id,
                                   'content' => todo_list_item.content,
                                   'status' => todo_list_item.status,
-                                  'author' => {
-                                    'id' => user.id,
-                                    'name' => user.name
-                                  },
                                   'todo_list' => {
                                     'id' => todo_list.id,
-                                    'title' => todo_list.title
+                                    'title' => todo_list.title,
+                                    'author' => {
+                                      'id' => user.id,
+                                      'name' => user.name
+                                    }
                                   }
                                 })
     end

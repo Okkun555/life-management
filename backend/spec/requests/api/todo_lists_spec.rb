@@ -132,7 +132,8 @@ RSpec.describe 'Api::TodoLists', type: :request do
 
     context '正常系' do
       let(:current_todo_list) do
-        create(:todo_list, title: '2025/07/20', author: user, created_at: Time.zone.parse('2025/07/20 00:00:00'), is_current: true)
+        create(:todo_list, title: '2025/07/20', author: user, created_at: Time.zone.parse('2025/07/20 00:00:00'),
+                           is_current: true)
       end
       let(:todo_list_item1) { create(:todo_list_item, content: 'やること1', author: user, todo_list: current_todo_list) }
       let(:todo_list_item2) { create(:todo_list_item, content: 'やること2', author: user, todo_list: current_todo_list) }

@@ -22,13 +22,13 @@ RSpec.describe 'Api::TodoListItemStatuses', type: :request do
                                                'id' => todo_list_item.id,
                                                'content' => todo_list_item.content,
                                                'status' => 'completed',
-                                               'author' => {
-                                                 'id' => user.id,
-                                                 'name' => user.name
-                                               },
                                                'todo_list' => {
                                                  'id' => todo_list.id,
-                                                 'title' => todo_list.title
+                                                 'title' => todo_list.title,
+                                                 'author' => {
+                                                   'id' => user.id,
+                                                   'name' => user.name,
+                                                 }
                                                }
                                              })
         end

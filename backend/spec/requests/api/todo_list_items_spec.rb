@@ -22,13 +22,13 @@ RSpec.describe 'Api::TodoListItems', type: :request do
                                                'id' => created_todo_list_item.id,
                                                'content' => 'test',
                                                'status' => 'pending',
-                                               'author' => {
-                                                 'id' => user.id,
-                                                 'name' => user.name
-                                               },
                                                'todo_list' => {
                                                  'id' => todo_list.id,
-                                                 'title' => todo_list.title
+                                                 'title' => todo_list.title,
+                                                 'author' => {
+                                                   'id' => user.id,
+                                                   'name' => user.name
+                                                 }
                                                }
                                              })
         end
@@ -82,13 +82,13 @@ RSpec.describe 'Api::TodoListItems', type: :request do
                                                'id' => todo_list_item.id,
                                                'content' => 'update content',
                                                'status' => 'pending',
-                                               'author' => {
-                                                 'id' => user.id,
-                                                 'name' => user.name
-                                               },
                                                'todo_list' => {
                                                  'id' => todo_list.id,
-                                                 'title' => todo_list.title
+                                                 'title' => todo_list.title,
+                                                 'author' => {
+                                                   'id' => user.id,
+                                                   'name' => user.name
+                                                 }
                                                }
                                              })
         end
