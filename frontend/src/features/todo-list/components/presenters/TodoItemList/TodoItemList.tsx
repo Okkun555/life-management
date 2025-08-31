@@ -16,9 +16,10 @@ import type { TodoItem } from "@/features/todo-list/types";
 
 type TodoItemListProps = {
   todoItems: TodoItem[];
+  handleDeleteTodoItem: (_todoItemId: TodoItem["id"]) => void;
 };
 
-export const TodoItemList = ({ todoItems }: TodoItemListProps) => {
+export const TodoItemList = ({ todoItems, handleDeleteTodoItem }: TodoItemListProps) => {
   if (todoItems.length === 0) {
     return (
       <Typography>
@@ -34,7 +35,7 @@ export const TodoItemList = ({ todoItems }: TodoItemListProps) => {
           <ListItem
             key={item.id}
             secondaryAction={
-              <IconButton edge="end" onClick={() => console.log("削除リクエスト")}>
+              <IconButton edge="end" onClick={() => handleDeleteTodoItem(item.id)}>
                 <DeleteIcon />
               </IconButton>
             }

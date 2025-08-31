@@ -5,14 +5,19 @@ import { Typography, CircularProgress, Box } from "@/components/mui";
 import { AddTodoForm } from "../presenters/AddTodoForm";
 import { TodoItemList } from "../presenters/TodoItemList";
 
-import type { TodoList } from "@/features/todo-list/types";
+import type { TodoItem, TodoList } from "@/features/todo-list/types";
 
 type CurrentTodoListProps = {
   isLoading: boolean;
   todoList: TodoList | undefined;
+  handleDeleteTodoItem: (_todoItemId: TodoItem["id"]) => void;
 };
 
-export const CurrentTodoList = ({ isLoading, todoList }: CurrentTodoListProps) => {
+export const CurrentTodoList = ({
+  isLoading,
+  todoList,
+  handleDeleteTodoItem,
+}: CurrentTodoListProps) => {
   if (isLoading) {
     return <CircularProgress />;
   }
@@ -32,7 +37,12 @@ export const CurrentTodoList = ({ isLoading, todoList }: CurrentTodoListProps) =
       </Typography>
       <AddTodoForm todoListId={todoList.id} />
       <Box sx={{ mt: 3 }}>
-        {todoList.todoListItems && <TodoItemList todoItems={todoList.todoListItems} />}
+        {todoList.todoListItems && (
+          <TodoItemList
+            todoItems={todoList.todoListItems}
+            handleDeleteTodoItem={handleDeleteTodoItem}
+          />
+        )}
       </Box>
     </>
   );
