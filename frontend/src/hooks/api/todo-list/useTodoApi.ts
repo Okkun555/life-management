@@ -5,17 +5,10 @@ import { fetcher } from "@/libs/api/fetcher";
 import { path } from "@/libs/api/path";
 
 export const useFetchCurrentTodoList = () => {
-  const { data, isLoading } = useSWR<TodoList>(
-    path.currentTodoList, 
-    fetcher,
-    {
-      fallbackData: undefined, // 明示的にfallbackDataを設定
-      suspense: false // または、個別にsuspenseを無効化
-    }
-  );
+  const { data, isLoading } = useSWR<TodoList>(path.currentTodoList, fetcher);
 
-  return { 
+  return {
     todoList: data,
-    isLoading
+    isLoading,
   };
 };

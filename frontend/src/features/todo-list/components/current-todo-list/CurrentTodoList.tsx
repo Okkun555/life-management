@@ -1,8 +1,9 @@
 "use client";
 
-import { Typography, CircularProgress } from "@/components/mui";
+import { Typography, CircularProgress, Box } from "@/components/mui";
 
 import { AddTodoForm } from "../presenters/AddTodoForm";
+import { TodoItemList } from "../presenters/TodoItemList";
 
 import type { TodoList } from "@/features/todo-list/types";
 
@@ -30,6 +31,9 @@ export const CurrentTodoList = ({ isLoading, todoList }: CurrentTodoListProps) =
         {todoList.title}のTODO管理
       </Typography>
       <AddTodoForm todoListId={todoList.id} />
+      <Box sx={{ mt: 3 }}>
+        {todoList.todoListItems && <TodoItemList todoItems={todoList.todoListItems} />}
+      </Box>
     </>
   );
 };
