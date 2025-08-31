@@ -18,29 +18,23 @@ export const Default: Story = {
         id: 1,
         content: "テスト1",
         status: "pending",
-        author: {
-          id: 1,
-          name: "test",
-        },
       },
       {
         id: 2,
         content: "テスト2",
         status: "completed",
-        author: {
-          id: 1,
-          name: "test",
-        },
       },
       {
         id: 3,
         content: "テスト3",
         status: "pending",
-        author: {
-          id: 1,
-          name: "test",
-        },
       },
     ],
+  },
+};
+
+export const Empty: Story = {
+  args: {
+    todoItems: [],
   },
 };

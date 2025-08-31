@@ -9,6 +9,7 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  Typography,
 } from "@/components/mui";
 
 import type { TodoItem } from "@/features/todo-list/types";
@@ -17,39 +18,49 @@ type TodoItemListProps = {
   todoItems: TodoItem[];
 };
 
-export const TodoItemList = ({ todoItems }: TodoItemListProps) => (
-  <Paper>
-    <List sx={{ width: "100%" }}>
-      {todoItems.map((item) => (
-        <ListItem
-          key={item.id}
-          secondaryAction={
-            <IconButton edge="end" onClick={() => console.log("削除リクエスト")}>
-              <DeleteIcon />
-            </IconButton>
-          }
-          disablePadding
-        >
-          <ListItemButton onClick={() => console.log("完了リクエスト")} dense>
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={item.status === "completed"}
-                tabIndex={-1}
-                disableRipple
-              />
-            </ListItemIcon>
-            <ListItemText
-              sx={{
-                textDecoration: item.status === "completed" ? "line-through" : "none",
-                color: item.status === "completed" ? "text.secondary" : "text.primary",
-              }}
-            >
-              {item.content}
-            </ListItemText>
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-  </Paper>
-);
+export const TodoItemList = ({ todoItems }: TodoItemListProps) => {
+  if (todoItems.length === 0) {
+    return (
+      <Typography>
+        登録されたTODOはありません。フォームからやるべきことを登録しましょう！
+      </Typography>
+    );
+  }
+
+  return (
+    <Paper>
+      <List sx={{ width: "100%" }}>
+        {todoItems.map((item) => (
+          <ListItem
+            key={item.id}
+            secondaryAction={
+              <IconButton edge="end" onClick={() => console.log("削除リクエスト")}>
+                <DeleteIcon />
+              </IconButton>
+            }
+            disablePadding
+          >
+            <ListItemButton onClick={() => console.log("完了リクエスト")} dense>
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={item.status === "completed"}
+                  tabIndex={-1}
+                  disableRipple
+                />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  textDecoration: item.status === "completed" ? "line-through" : "none",
+                  color: item.status === "completed" ? "text.secondary" : "text.primary",
+                }}
+              >
+                {item.content}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Paper>
+  );
+};
