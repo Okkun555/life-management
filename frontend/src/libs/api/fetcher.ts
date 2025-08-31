@@ -12,6 +12,7 @@ const axiosInstance = axios.create({
 });
 
 export const fetcher = <T>(url: string): Promise<T> =>
+  // MEMO: API側からはスネークケースでレスポンスが返ってくるので、camelizeKeysでデータをキャメルケースに変換
   axiosInstance.get(url).then((res) => camelizeKeys(res.data) as T);
 
 export const postRequest = <T, U>(url: string, { arg }: { arg: U }): Promise<T> =>
