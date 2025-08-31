@@ -1,9 +1,12 @@
 "use client";
 
 import { Typography, CircularProgress, Box } from "@/components/mui";
-
-import { AddTodoForm } from "../presenters/AddTodoForm";
-import { TodoItemList } from "../presenters/TodoItemList";
+import { AddTodoForm } from "@/features/todo-list/components/presenters/AddTodoForm";
+import { TodoItemList } from "@/features/todo-list/components/presenters/TodoItemList";
+import {
+  ChangeTodoItemStatusParams,
+  ChangeTodoItemStatusResponse,
+} from "@/hooks/api/todo-list/type";
 
 import type { TodoItem, TodoList } from "@/features/todo-list/types";
 
@@ -11,12 +14,16 @@ type CurrentTodoListProps = {
   isLoading: boolean;
   todoList: TodoList | undefined;
   handleDeleteTodoItem: (_todoItemId: TodoItem["id"]) => void;
+  handleChangeTodoItemStatus: (
+    _arg: ChangeTodoItemStatusParams,
+  ) => Promise<ChangeTodoItemStatusResponse>;
 };
 
 export const CurrentTodoList = ({
   isLoading,
   todoList,
   handleDeleteTodoItem,
+  handleChangeTodoItemStatus,
 }: CurrentTodoListProps) => {
   if (isLoading) {
     return <CircularProgress />;
@@ -41,6 +48,7 @@ export const CurrentTodoList = ({
           <TodoItemList
             todoItems={todoList.todoListItems}
             handleDeleteTodoItem={handleDeleteTodoItem}
+            handleChangeTodoItemStatus={handleChangeTodoItemStatus}
           />
         )}
       </Box>

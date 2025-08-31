@@ -4,4 +4,6 @@ export const path = {
   addTodoItem: (todoListId: number) => `/todo_lists/${todoListId}/todo_list_items`,
   deleteTodoItem: (todoListId: number, todoItemId: number) =>
     `/todo_lists/${todoListId}/todo_list_items/${todoItemId}`,
+  updateTodoItemStatus: (todoListId: number, todoItemId: number) =>
+    `/todo_lists/${todoListId}/todo_list_items/${todoItemId}/status`,
 };

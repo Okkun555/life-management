@@ -15,10 +15,10 @@ export const fetcher = <T>(url: string): Promise<T> =>
   // MEMO: API側からはスネークケースでレスポンスが返ってくるので、camelizeKeysでデータをキャメルケースに変換
   axiosInstance.get(url).then((res) => camelizeKeys(res.data) as T);
 
-export const postRequest = <T, U>(url: string, { arg }: { arg: U }): Promise<T> =>
+export const postRequest = <U, T>(url: string, { arg }: { arg: U }): Promise<T> =>
   axiosInstance.post(url, arg).then((res) => camelizeKeys(res.data) as T);
 
-export const putRequest = <T, U>(url: string, { arg }: { arg: U }): Promise<T> =>
+export const putRequest = <U, T>(url: string, { arg }: { arg: U }): Promise<T> =>
   axiosInstance.put(url, arg).then((res) => camelizeKeys(res.data) as T);
 
 export const deleteRequest = <T>(url: string): Promise<T> =>

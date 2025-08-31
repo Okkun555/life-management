@@ -13,13 +13,24 @@ import {
 } from "@/components/mui";
 
 import type { TodoItem } from "@/features/todo-list/types";
+import type {
+  ChangeTodoItemStatusParams,
+  ChangeTodoItemStatusResponse,
+} from "@/hooks/api/todo-list/type";
 
 type TodoItemListProps = {
   todoItems: TodoItem[];
+  handleChangeTodoItemStatus: (
+    _arg: ChangeTodoItemStatusParams,
+  ) => Promise<ChangeTodoItemStatusResponse>;
   handleDeleteTodoItem: (_todoItemId: TodoItem["id"]) => void;
 };
 
-export const TodoItemList = ({ todoItems, handleDeleteTodoItem }: TodoItemListProps) => {
+export const TodoItemList = ({
+  todoItems,
+  handleDeleteTodoItem,
+  handleChangeTodoItemStatus,
+}: TodoItemListProps) => {
   if (todoItems.length === 0) {
     return (
       <Typography>
@@ -41,7 +52,15 @@ export const TodoItemList = ({ todoItems, handleDeleteTodoItem }: TodoItemListPr
             }
             disablePadding
           >
-            <ListItemButton onClick={() => console.log("完了リクエスト")} dense>
+            <ListItemButton
+              onClick={() =>
+                handleChangeTodoItemStatus({
+                  id: item.id,
+                  status: item.status === "completed" ? "pending" : "completed",
+                })
+              }
+              dense
+            >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
