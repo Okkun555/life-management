@@ -1,12 +1,11 @@
 "use client";
 
+import Confetti from "react-dom-confetti";
+
 import { Typography, CircularProgress, Box } from "@/components/mui";
 import { AddTodoForm } from "@/features/todo-list/components/presenters/AddTodoForm";
 import { TodoItemList } from "@/features/todo-list/components/presenters/TodoItemList";
-import {
-  ChangeTodoItemStatusParams,
-  ChangeTodoItemStatusResponse,
-} from "@/hooks/api/todo-list/type";
+import { ChangeTodoItemStatusParams } from "@/hooks/api/todo-list/type";
 
 import type { TodoItem, TodoList } from "@/features/todo-list/types";
 
@@ -14,9 +13,8 @@ type CurrentTodoListProps = {
   isLoading: boolean;
   todoList: TodoList | undefined;
   handleDeleteTodoItem: (_todoItemId: TodoItem["id"]) => void;
-  handleChangeTodoItemStatus: (
-    _arg: ChangeTodoItemStatusParams,
-  ) => Promise<ChangeTodoItemStatusResponse>;
+  handleChangeTodoItemStatus: (_arg: ChangeTodoItemStatusParams) => Promise<void>;
+  activeConfetti: boolean;
 };
 
 export const CurrentTodoList = ({
@@ -24,6 +22,7 @@ export const CurrentTodoList = ({
   todoList,
   handleDeleteTodoItem,
   handleChangeTodoItemStatus,
+  activeConfetti,
 }: CurrentTodoListProps) => {
   if (isLoading) {
     return <CircularProgress />;
@@ -52,6 +51,7 @@ export const CurrentTodoList = ({
           />
         )}
       </Box>
+      <Confetti active={activeConfetti} />
     </>
   );
 };

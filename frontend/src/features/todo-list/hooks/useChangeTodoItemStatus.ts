@@ -8,10 +8,10 @@ import type { ChangeTodoItemStatusParams } from "@/hooks/api/todo-list/type";
 export const useChangeTodoItemStatus = (todoListId: TodoList["id"]) => {
   const { trigger } = useChangeTodoItemStatusApi(todoListId);
 
-  const handleChangeTodoItemStatus = useCallback(
+  const onSubmitChangeTodoItemStatus = useCallback(
     async (arg: ChangeTodoItemStatusParams) => await trigger(arg),
     [trigger],
   );
 
-  return { handleChangeTodoItemStatus };
+  return { onSubmitChangeTodoItemStatus };
 };

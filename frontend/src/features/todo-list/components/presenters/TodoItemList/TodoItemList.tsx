@@ -13,16 +13,11 @@ import {
 } from "@/components/mui";
 
 import type { TodoItem } from "@/features/todo-list/types";
-import type {
-  ChangeTodoItemStatusParams,
-  ChangeTodoItemStatusResponse,
-} from "@/hooks/api/todo-list/type";
+import type { ChangeTodoItemStatusParams } from "@/hooks/api/todo-list/type";
 
 type TodoItemListProps = {
   todoItems: TodoItem[];
-  handleChangeTodoItemStatus: (
-    _arg: ChangeTodoItemStatusParams,
-  ) => Promise<ChangeTodoItemStatusResponse>;
+  handleChangeTodoItemStatus: (_arg: ChangeTodoItemStatusParams) => Promise<void>;
   handleDeleteTodoItem: (_todoItemId: TodoItem["id"]) => void;
 };
 
