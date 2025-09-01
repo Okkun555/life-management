@@ -3,7 +3,7 @@ class TodoList < ApplicationRecord
   validates :is_current, inclusion: { in: [true, false] }
 
   belongs_to :author, foreign_key: 'user_id', class_name: 'User', inverse_of: :todo_lists
-  has_many :todo_list_items, dependent: :destroy
+  has_many :todo_list_items, -> { order(created_at: :desc) }, dependent: :destroy, inverse_of: :todo_list
   has_one :todo_review, dependent: :destroy
 
   scope :by_author, ->(user) { where(author: user) }

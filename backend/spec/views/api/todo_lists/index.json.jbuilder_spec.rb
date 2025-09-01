@@ -30,14 +30,14 @@ RSpec.describe 'api/todo_lists/index.json.jbuilder', type: :view do
                                   'is_current' => todo_list1.is_current,
                                   'todo_list_items' => [
                                     {
-                                      'id' => todo_list_item1.id,
-                                      'content' => todo_list_item1.content,
-                                      'status' => todo_list_item1.status
-                                    },
-                                    {
                                       'id' => todo_list_item2.id,
                                       'content' => todo_list_item2.content,
                                       'status' => todo_list_item2.status
+                                    },
+                                    {
+                                      'id' => todo_list_item1.id,
+                                      'content' => todo_list_item1.content,
+                                      'status' => todo_list_item1.status
                                     }
                                   ]
                                 },

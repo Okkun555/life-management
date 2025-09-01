@@ -65,14 +65,14 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                                'is_current' => todo_list1.is_current,
                                                'todo_list_items' => [
                                                  {
-                                                   'id' => todo_list_item1.id,
-                                                   'content' => todo_list_item1.content,
-                                                   'status' => todo_list_item1.status
-                                                 },
-                                                 {
                                                    'id' => todo_list_item2.id,
                                                    'content' => todo_list_item2.content,
                                                    'status' => todo_list_item2.status
+                                                 },
+                                                 {
+                                                   'id' => todo_list_item1.id,
+                                                   'content' => todo_list_item1.content,
+                                                   'status' => todo_list_item1.status
                                                  }
                                                ]
                                              }
@@ -112,14 +112,14 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                            'is_current' => target_todo_list.is_current,
                                            'todo_list_items' => [
                                              {
-                                               'id' => target_todo_list_item1.id,
-                                               'content' => target_todo_list_item1.content,
-                                               'status' => target_todo_list_item1.status
-                                             },
-                                             {
                                                'id' => target_todo_list_item2.id,
                                                'content' => target_todo_list_item2.content,
                                                'status' => target_todo_list_item2.status
+                                             },
+                                             {
+                                               'id' => target_todo_list_item1.id,
+                                               'content' => target_todo_list_item1.content,
+                                               'status' => target_todo_list_item1.status
                                              }
                                            ]
                                          })
@@ -163,14 +163,14 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                              'is_current' => current_todo_list.is_current,
                                              'todo_list_items' => [
                                                {
-                                                 'id' => todo_list_item1.id,
-                                                 'content' => todo_list_item1.content,
-                                                 'status' => todo_list_item1.status
-                                               },
-                                               {
                                                  'id' => todo_list_item2.id,
                                                  'content' => todo_list_item2.content,
                                                  'status' => todo_list_item2.status
+                                               },
+                                               {
+                                                 'id' => todo_list_item1.id,
+                                                 'content' => todo_list_item1.content,
+                                                 'status' => todo_list_item1.status
                                                }
                                              ]
                                            })

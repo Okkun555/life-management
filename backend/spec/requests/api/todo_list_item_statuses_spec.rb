@@ -27,7 +27,7 @@ RSpec.describe 'Api::TodoListItemStatuses', type: :request do
                                                  'title' => todo_list.title,
                                                  'author' => {
                                                    'id' => user.id,
-                                                   'name' => user.name,
+                                                   'name' => user.name
                                                  }
                                                }
                                              })
