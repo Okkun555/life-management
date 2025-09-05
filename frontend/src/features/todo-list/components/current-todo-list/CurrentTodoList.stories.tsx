@@ -22,21 +22,17 @@ export const Default: Story = {
           id: 1,
           content: "買い物",
           status: "pending",
-          author: {
-            id: 1,
-            name: "山田太郎",
-          },
         },
         {
           id: 2,
           content: "勉強",
           status: "pending",
-          author: {
-            id: 2,
-            name: "山田花子",
-          },
         },
       ],
+      author: {
+        id: 2,
+        name: "山田花子",
+      },
     },
   },
 };
