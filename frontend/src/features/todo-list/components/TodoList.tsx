@@ -6,7 +6,7 @@ import { Box } from "@/components/mui";
 import { Tabs } from "@/components/tabs";
 
 import { AllTodoListAdapter } from "./AllTodoList";
-import { CurrentTodoListAdapter } from "./current-todo-list";
+import { CurrentTodoListAdapter } from "./CurrentTodoList";
 
 const todoListTabItems = {
   currentTodo: "本日のTODO",

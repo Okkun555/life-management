@@ -3,8 +3,8 @@
 import Confetti from "react-dom-confetti";
 
 import { Typography, CircularProgress, Box } from "@/components/mui";
-import { AddTodoForm } from "@/features/todo-list/components/presenters/AddTodoForm";
-import { TodoItemList } from "@/features/todo-list/components/presenters/TodoItemList";
+import { AddTodoForm } from "@/features/todo-list/components/AddTodoForm";
+import { TodoItemList } from "@/features/todo-list/components/TodoItemList";
 import { ChangeTodoItemStatusParams } from "@/hooks/api/todo-list/type";
 
 import type { TodoItem, TodoList } from "@/features/todo-list/types";
