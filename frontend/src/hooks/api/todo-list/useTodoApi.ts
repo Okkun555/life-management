@@ -29,3 +29,17 @@ export const useFetchCurrentTodoList = () => {
     isLoading,
   };
 };
+
+/**
+ * 指定したIDのTODOリストを取得
+ * @param id
+ * @returns
+ */
+export const useFetchTodoList = (id: TodoList["id"]) => {
+  const { data, isLoading } = useSWR<TodoList>(path.todoList(id), fetcher);
+
+  return {
+    todoList: data,
+    isLoading,
+  };
+};
