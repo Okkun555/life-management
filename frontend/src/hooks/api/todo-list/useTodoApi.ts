@@ -1,7 +1,8 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+import useSWRMutation from "swr/mutation";
 
 import { TodoList } from "@/features/todo-list/types";
-import { fetcher } from "@/libs/api/fetcher";
+import { fetcher, postRequest } from "@/libs/api/fetcher";
 import { path } from "@/libs/api/path";
 
 /**
@@ -42,4 +43,18 @@ export const useFetchTodoList = (id: TodoList["id"]) => {
     todoList: data,
     isLoading,
   };
+};
+
+/**
+ * 本日のTODOリストを作成（紐づくTODOリストが存在しない場合 = 初回アクセス時のみ）
+ * @returns
+ */
+export const useAddTodoList = () => {
+  const { trigger, isMutating } = useSWRMutation(path.addTodoList, postRequest, {
+    onSuccess: () => {
+      mutate(path.currentTodoList);
+    },
+  });
+
+  return { trigger, isMutating };
 };
