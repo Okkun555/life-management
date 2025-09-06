@@ -41,4 +41,20 @@ RSpec.describe TodoList, type: :model do
       expect(TodoList.ordered_by_date).to eq([todo_list2, todo_list1, todo_list3])
     end
   end
+
+  describe 'create_current_todo_list' do
+    context '本日のTODOリストが存在しない場合' do
+      it '本日のTODOリストが作成される' do
+        expect { TodoList.create_current_todo_list(user) }.to change(TodoList, :count).by(1)
+      end
+    end
+
+    context '本日のTODOリストが存在する場合' do
+      let!(:todo_list) { create(:todo_list, title: Time.zone.today.strftime('%Y/%m/%d'), author: user) }
+
+      it 'エラーが発生する' do
+        expect { TodoList.create_current_todo_list(user) }.to raise_error(StandardError, '本日のTODOリストはすでに存在します')
+      end
+    end
+  end
 end

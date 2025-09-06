@@ -9,6 +9,11 @@ class Api::TodoListsController < ApplicationController
     render :show, status: :ok
   end
 
+  def create
+    @todo_list = TodoList.create_current_todo_list(current_user)
+    render :show, status: :created
+  end
+
   def latest
     @todo_list = TodoList.preload(:author, :todo_list_items).by_author(current_user).find_by(is_current: true)
 

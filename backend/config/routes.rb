@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :todo_lists, only: [:index, :show] do
+    resources :todo_lists, only: [:index, :show, :create] do
       collection do
         get :latest
       end

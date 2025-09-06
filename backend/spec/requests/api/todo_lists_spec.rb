@@ -126,6 +126,49 @@ RSpec.describe 'Api::TodoLists', type: :request do
     end
   end
 
+  describe 'POST /api/todo_lists' do
+    context '正常系' do
+      context 'ユーザーに紐づくTODOリストが存在しない場合' do
+        before { subject }
+
+        it '201ステータスが返却される' do
+          expect(response).to have_http_status(:created)
+        end
+
+        it '本日のTODOリストが作成される' do
+          expect(TodoList.count).to eq(1)
+        end
+
+        it '本日のTODOリストが返却される' do
+          expect(response.parsed_body).to eq({
+                                               'id' => TodoList.first.id,
+                                               'title' => TodoList.first.title,
+                                               'author' => {
+                                                 'id' => user.id,
+                                                 'name' => user.name
+                                               },
+                                               'is_current' => TodoList.first.is_current,
+                                               'todo_list_items' => []
+                                             })
+        end
+      end
+
+      context 'ユーザーに紐づくTODOリストが存在する場合' do
+        let(:todo_list) { create(:todo_list, title: Time.zone.today.strftime('%Y/%m/%d'), author: user) }
+
+        before do
+          todo_list
+          subject
+        end
+
+        it '500ステータスが返却される' do
+          expect(response).to have_http_status(:internal_server_error)
+          expect(response.parsed_body).to eq({ 'error' => '予期せぬエラーが発生しました。管理者にお問い合わせください。' })
+        end
+      end
+    end
+  end
+
   describe 'GET /api/todo_lists/latest' do
     let(:todo_list1) { create(:todo_list, title: '2025/07/18', author: user, created_at: Time.zone.parse('2025/07/18 00:00:00')) }
     let(:todo_list2) { create(:todo_list, title: '2025/07/19', author: user, created_at: Time.zone.parse('2025/07/19 00:00:00')) }
