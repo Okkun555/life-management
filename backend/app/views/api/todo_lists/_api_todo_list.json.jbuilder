@@ -1,4 +1,5 @@
 json.extract! api_todo_list, :id, :title, :is_current
+json.completed_rate api_todo_list.completed_rate
 json.author do
   json.extract! api_todo_list.author, :id, :name
 end

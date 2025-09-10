@@ -23,6 +23,7 @@ RSpec.describe 'api/todo_lists/index.json.jbuilder', type: :view do
                                 {
                                   'id' => todo_list1.id,
                                   'title' => todo_list1.title,
+                                  'completed_rate' => todo_list1.completed_rate,
                                   'author' => {
                                     'id' => user.id,
                                     'name' => user.name
@@ -44,6 +45,7 @@ RSpec.describe 'api/todo_lists/index.json.jbuilder', type: :view do
                                 {
                                   'id' => todo_list2.id,
                                   'title' => todo_list2.title,
+                                  'completed_rate' => todo_list2.completed_rate,
                                   'author' => {
                                     'id' => user.id,
                                     'name' => user.name

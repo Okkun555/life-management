@@ -31,8 +31,8 @@ RSpec.describe 'Api::TodoLists', type: :request do
       let(:todo_list2) do
         create(:todo_list, title: '2025/07/19', author: user, created_at: Time.zone.parse('2025/07/19 00:00:00'))
       end
-      let(:todo_list_item1) { create(:todo_list_item, content: 'やること1', author: user, todo_list: todo_list1) }
-      let(:todo_list_item2) { create(:todo_list_item, content: 'やること2', author: user, todo_list: todo_list1) }
+      let(:todo_list_item1) { create(:todo_list_item, content: 'やること1', author: user, todo_list: todo_list1, status: :completed) }
+      let(:todo_list_item2) { create(:todo_list_item, content: 'やること2', author: user, todo_list: todo_list1, status: :pending) }
 
       before do
         todo_list1
@@ -48,6 +48,7 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                              {
                                                'id' => todo_list2.id,
                                                'title' => todo_list2.title,
+                                               'completed_rate' => todo_list2.completed_rate,
                                                'author' => {
                                                  'id' => user.id,
                                                  'name' => user.name
@@ -58,6 +59,7 @@ RSpec.describe 'Api::TodoLists', type: :request do
                                              {
                                                'id' => todo_list1.id,
                                                'title' => todo_list1.title,
+                                               'completed_rate' => todo_list1.completed_rate,
                                                'author' => {
                                                  'id' => user.id,
                                                  'name' => user.name
@@ -105,6 +107,7 @@ RSpec.describe 'Api::TodoLists', type: :request do
       expect(response.parsed_body).to eq({
                                            'id' => target_todo_list.id,
                                            'title' => target_todo_list.title,
+                                           'completed_rate' => target_todo_list.completed_rate,
                                            'author' => {
                                              'id' => user.id,
                                              'name' => user.name
@@ -143,6 +146,7 @@ RSpec.describe 'Api::TodoLists', type: :request do
           expect(response.parsed_body).to eq({
                                                'id' => TodoList.first.id,
                                                'title' => TodoList.first.title,
+                                               'completed_rate' => TodoList.first.completed_rate,
                                                'author' => {
                                                  'id' => user.id,
                                                  'name' => user.name
@@ -199,6 +203,7 @@ RSpec.describe 'Api::TodoLists', type: :request do
         expect(response.parsed_body).to eq({
                                              'id' => current_todo_list.id,
                                              'title' => current_todo_list.title,
+                                             'completed_rate' => current_todo_list.completed_rate,
                                              'author' => {
                                                'id' => user.id,
                                                'name' => user.name

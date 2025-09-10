@@ -57,4 +57,47 @@ RSpec.describe TodoList, type: :model do
       end
     end
   end
+
+  describe 'completed_rate' do
+    context 'TODOリストに紐づくTODOリストアイテムが存在しない場合' do
+      let(:todo_list) { create(:todo_list, author: user) }
+
+      it 'nilが返却される' do
+        expect(todo_list.completed_rate).to be_nil
+      end
+    end
+
+    context 'TODOリストに紐づくTODOリストアイテムが存在する場合' do
+      context '全てのTODOリストアイテムが完了している場合' do
+        let!(:todo_list) { create(:todo_list, author: user) }
+        let!(:todo_list_item1) { create(:todo_list_item, todo_list: todo_list, status: :completed) }
+        let!(:todo_list_item2) { create(:todo_list_item, todo_list: todo_list, status: :completed) }
+
+        it '100が返却される' do
+          expect(todo_list.completed_rate).to eq(100)
+        end
+      end
+
+      context '全てのTODOリストアイテムが未完了の場合' do
+        let!(:todo_list) { create(:todo_list, author: user) }
+        let!(:todo_list_item1) { create(:todo_list_item, todo_list: todo_list, status: :pending) }
+        let!(:todo_list_item2) { create(:todo_list_item, todo_list: todo_list, status: :pending) }
+
+        it '0が返却される' do
+          expect(todo_list.completed_rate).to eq(0)
+        end
+      end
+
+      context 'TODOリストアイテムが1/3完了している場合' do
+        let!(:todo_list) { create(:todo_list, author: user) }
+        let!(:todo_list_item1) { create(:todo_list_item, todo_list: todo_list, status: :completed) }
+        let!(:todo_list_item2) { create(:todo_list_item, todo_list: todo_list, status: :pending) }
+        let!(:todo_list_item3) { create(:todo_list_item, todo_list: todo_list, status: :pending) }
+
+        it '66.67が返却される' do
+          expect(todo_list.completed_rate).to eq(33)
+        end
+      end
+    end
+  end
 end
