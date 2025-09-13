@@ -16,6 +16,7 @@ export const Default: Story = {
     todoList: {
       id: 1,
       title: "2025/08/23",
+      completedRate: 33,
       todoListItems: [
         {
           id: 1,
@@ -45,11 +46,6 @@ export const Default: Story = {
         {
           id: 6,
           content: "買い物6",
-          status: "pending",
-        },
-        {
-          id: 7,
-          content: "買い物7",
           status: "pending",
         },
       ],
