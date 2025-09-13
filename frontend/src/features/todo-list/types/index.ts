@@ -2,6 +2,7 @@ export type TodoList = {
   id: number;
   title: string;
   todoListItems: Array<TodoItem>;
+  completedRate: number;
   author: {
     id: number;
     name: string;

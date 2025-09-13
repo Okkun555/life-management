@@ -43,13 +43,11 @@ export const CurrentTodoList = ({
       </Typography>
       <AddTodoForm todoListId={todoList.id} />
       <Box sx={{ mt: 3 }}>
-        {todoList.todoListItems && (
-          <TodoItemList
-            todoItems={todoList.todoListItems}
-            handleDeleteTodoItem={handleDeleteTodoItem}
-            handleChangeTodoItemStatus={handleChangeTodoItemStatus}
-          />
-        )}
+        <TodoItemList
+          todoList={todoList}
+          handleDeleteTodoItem={handleDeleteTodoItem}
+          handleChangeTodoItemStatus={handleChangeTodoItemStatus}
+        />
       </Box>
       <Confetti active={activeConfetti} />
     </>

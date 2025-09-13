@@ -15,6 +15,7 @@ export {
   FormControl,
   Grid,
   IconButton,
+  LinearProgress,
   List,
   ListItem,
   ListItemButton,

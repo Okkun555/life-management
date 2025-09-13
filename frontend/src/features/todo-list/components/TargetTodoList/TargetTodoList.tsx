@@ -26,9 +26,7 @@ export const TargetTodoList = ({ todoList, isLoading }: TargetTodoListProps) => 
           <Link href={"/todo-list"}>本日のTODOを表示する</Link>
         </Button>
       </Box>
-      <Box sx={{ mt: 3 }}>
-        {todoList?.todoListItems && <TodoItemList todoItems={todoList.todoListItems} />}
-      </Box>
+      <Box sx={{ mt: 3 }}>{todoList?.todoListItems && <TodoItemList todoList={todoList} />}</Box>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
+  Box,
   Checkbox,
   IconButton,
   List,
@@ -12,21 +13,23 @@ import {
   Typography,
 } from "@/components/mui";
 
-import type { TodoItem } from "@/features/todo-list/types";
+import { TodoProgressBar } from "../TodoProgressBar";
+
+import type { TodoItem, TodoList } from "@/features/todo-list/types";
 import type { ChangeTodoItemStatusParams } from "@/hooks/api/todo-list/type";
 
 type TodoItemListProps = {
-  todoItems: TodoItem[];
+  todoList: TodoList;
   handleChangeTodoItemStatus?: (_arg: ChangeTodoItemStatusParams) => Promise<void>;
   handleDeleteTodoItem?: (_todoItemId: TodoItem["id"]) => void;
 };
 
 export const TodoItemList = ({
-  todoItems,
+  todoList,
   handleDeleteTodoItem = undefined,
   handleChangeTodoItemStatus = undefined,
 }: TodoItemListProps) => {
-  if (todoItems.length === 0) {
+  if (todoList.todoListItems.length === 0) {
     return (
       <Typography>
         登録されたTODOはありません。
@@ -37,8 +40,11 @@ export const TodoItemList = ({
 
   return (
     <Paper>
+      <Box sx={{ pt: 2, pr: 3, pl: 3 }}>
+        <TodoProgressBar value={todoList.completedRate} />
+      </Box>
       <List sx={{ width: "100%" }}>
-        {todoItems.map((item) => {
+        {todoList.todoListItems.map((item) => {
           if (!handleDeleteTodoItem || !handleChangeTodoItemStatus) {
             return (
               <ListItem key={item.id}>
