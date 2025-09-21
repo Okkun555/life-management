@@ -62,13 +62,51 @@
 
 ## テーブル設計
 ### mission_statement_values
+サポート機能フェーズ1のデータを格納
+
+| 論理名       | 物理名       | データ型 | デフォルト | null許可 | キー | 備考 |
+| ------------ | ------------ | -------- | ---------- | -------- | ---- | ---- |
+| ID           | id           | bigint   |            |          | PK   |      |
+| ユーザーID   | user_id      | bigint   |            |          | FK   |      |
+| 内容         | content      | text     |            |          |      |      |
+| 作成日時 | created_at | datetime | CURRENT_TIMESTAMP |          |      |      |
+| 更新日時 | updated_at | datetime | CURRENT_TIMESTAMP | ⚪︎     |      |      |
+
 
 ### mission_statement_roles
+サポート機能フェーズ2のデータを格納
+
+| 論理名       | 物理名       | データ型     | デフォルト        | null許可 | キー | 備考 |
+| ------------ | ------------ | ------------ | ----------------- | -------- | ---- | ---- |
+| ID           | id           | bigint       |                   |          | PK   |      |
+| ユーザーID   | user_id      | bigint       |                   |          | FK   |      |
+| 役割         | role         | varchar(100) |                   |          |      |      |
+| 作成日時     | created_at   | datetime     | CURRENT_TIMESTAMP |          |      |      |
+| 更新日時     | updated_at   | datetime     | CURRENT_TIMESTAMP | ⚪︎     |      |      |
+
 
 ### mission_statement_goals
+サポート機能フェーズ3のデータを格納
+
+| 論理名       | 物理名       | データ型     | デフォルト        | null許可 | キー | 備考 |
+| ------------ | ------------ | ------------ | ----------------- | -------- | ---- | ---- |
+| ID           | id           | bigint       |                   |          | PK   |      |
+| ユーザーID   | user_id      | bigint       |                   |          | FK   |      |
+| 役割ID       | role_id      | bigint       |                   |          |      | FK   |
+| 目標         | goal         | varchar(140) |                   |          |      |      |
+| 作成日時     | created_at   | datetime     | CURRENT_TIMESTAMP |          |      |      |
+| 更新日時     | updated_at   | datetime     | CURRENT_TIMESTAMP | ⚪︎     |      |      |
+
 
 ### mission_statements
+| 論理名         | 物理名     | データ型 | デフォルト        | null許可 | キー | 備考 |
+| -------------- | ---------- | -------- | ----------------- | -------- | ---- | ---- |
+| ID             | id         | bigint   |                   |          | PK   |      |
+| ユーザーID     | user_id    | bigint   |                   |          | FK   |      |
+| 内容           | content    | text     |                   |          |      |      |
+| バージョン管理 | version    | int      | 1                 |          |      |      |
+| 作成日時       | created_at | datetime | CURRENT_TIMESTAMP |          |      |      |
+| 更新日時       | updated_at | datetime | CURRENT_TIMESTAMP | ⚪︎     |      |      |
 
-### mission_statement_versions
-
-
+- user_id, mission_statement_id, versionの複合ユニーク
+- 通常編集 or バージョン更新を選択させて、その選択肢次第でversionカラムを更新する
