@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_18_073011) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_21_111939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "mission_statement_values", force: :cascade do |t|
+    t.bigint "user_id", null: false, comment: "ユーザーID"
+    t.text "content", null: false, comment: "内容"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mission_statement_values_on_user_id"
+  end
 
   create_table "todo_list_items", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "ユーザーID"
@@ -55,6 +63,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_18_073011) do
     t.index ["supabase_uid"], name: "index_users_on_supabase_uid", unique: true
   end
 
+  add_foreign_key "mission_statement_values", "users"
   add_foreign_key "todo_list_items", "todo_lists"
   add_foreign_key "todo_list_items", "users"
   add_foreign_key "todo_lists", "users"
