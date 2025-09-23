@@ -103,7 +103,7 @@
 | -------------- | ---------- | -------- | ----------------- | -------- | ---- | ---- |
 | ID             | id         | bigint   |                   |          | PK   |      |
 | ユーザーID     | user_id    | bigint   |                   |          | FK   |      |
-| 内容           | content    | text     |                   |          |      |      |
+| 内容           | content    | varchar(100)     |                   |          |      |      |
 | バージョン管理 | version    | int      | 1                 |          |      |      |
 | 作成日時       | created_at | datetime | CURRENT_TIMESTAMP |          |      |      |
 | 更新日時       | updated_at | datetime | CURRENT_TIMESTAMP | ⚪︎     |      |      |
