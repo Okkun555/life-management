@@ -1,9 +1,14 @@
 class User < ApplicationRecord
-  validates :supabase_uid, presence: true, uniqueness: true
+  with_options dependent: :destroy do
+    has_many :todo_lists
+    has_many :todo_list_items
+    has_many :todo_reviews
+    has_many :mission_statement_roles
+    has_many :mission_statement_goals
+    has_many :mission_statements
+  end
 
-  has_many :todo_lists, dependent: :destroy
-  has_many :todo_list_items, dependent: :destroy
-  has_many :todo_reviews, dependent: :destroy
+  validates :supabase_uid, presence: true, uniqueness: true
 
   def self.create_daily_todo_lists
     formatted_date = Date.current.strftime('%Y-%m-%d')
