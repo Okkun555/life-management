@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
+    resource :profile, only: [:create]
+
+
     resources :todo_lists, only: [:index, :show, :create] do
       collection do
         get :latest
