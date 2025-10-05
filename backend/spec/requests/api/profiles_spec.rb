@@ -5,6 +5,35 @@ RSpec.describe 'Api::Profiles', type: :request do
 
   before { login(user) }
 
+  describe 'GET /api/profile' do
+    context 'ログインユーザーのプロフィールが存在しない場合' do
+      before { subject }
+
+      it '404ステータスが返却される' do
+        expect(response).to have_http_status(:not_found)
+        expect(response.parsed_body['error']).to eq('プロフィールは存在しません')
+      end
+    end
+
+    context 'ログインユーザーのプロフィールが存在する場合' do
+      let!(:profile) { create(:profile, user:) }
+
+      before { subject }
+
+      it '200ステータスとプロフィール情報を返却する' do
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to eq({
+                                             'id' => profile.id,
+                                             'name' => profile.user.name,
+                                             'birthday' => profile.birthday.to_s,
+                                             'age' => profile.age,
+                                             'sex' => profile.sex,
+                                             'is_public' => profile.is_public
+                                           })
+      end
+    end
+  end
+
   describe 'POST /api/profile' do
     let(:params) { { profile: { birthday:, sex:, is_public: } } }
     let(:birthday) { Date.new(1990, 1, 1) }

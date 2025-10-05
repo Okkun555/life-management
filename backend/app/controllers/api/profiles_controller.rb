@@ -1,5 +1,15 @@
 class Api::ProfilesController < ApplicationController
-  before_action :set_profile, only: [:update]
+  before_action :set_profile, only: [:show, :update]
+
+  def show
+    if @profile
+      render :show, status: :ok
+    else
+      render json: {
+        error: 'プロフィールは存在しません'
+      }, status: :not_found
+    end
+  end
 
   def create
     if current_user.profile.blank?

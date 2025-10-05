@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resource :profile, only: [:create, :update]
-
+    resource :profile, only: [:show, :create, :update]
 
     resources :todo_lists, only: [:index, :show, :create] do
       collection do
@@ -16,5 +15,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 end
