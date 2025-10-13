@@ -11,7 +11,7 @@ RSpec.describe 'Api::Profiles', type: :request do
 
       it '404ステータスが返却される' do
         expect(response).to have_http_status(:not_found)
-        expect(response.parsed_body['error']).to eq('プロフィールは存在しません')
+        expect(response.parsed_body['message']).to eq('プロフィールは存在しません。')
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe 'Api::Profiles', type: :request do
 
       it '422ステータスが返却される' do
         expect(response).to have_http_status(:conflict)
-        expect(response.parsed_body['error']).to eq('プロフィールはすでに存在します')
+        expect(response.parsed_body['message']).to eq('プロフィールはすでに存在します。')
       end
     end
   end
@@ -88,7 +88,7 @@ RSpec.describe 'Api::Profiles', type: :request do
 
       it '422ステータスが返却される' do
         expect(response).to have_http_status(:not_found)
-        expect(response.parsed_body['error']).to eq('プロフィールは存在しません')
+        expect(response.parsed_body['message']).to eq('プロフィールは存在しません。')
       end
     end
   end

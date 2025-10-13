@@ -7,6 +7,12 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_user
 
+  def render_error(key, status:)
+    render json: {
+      message: I18n.t(key)
+    }, status:
+  end
+
   private
 
   def authenticate_user!

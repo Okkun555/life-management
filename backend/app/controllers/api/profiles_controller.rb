@@ -5,9 +5,7 @@ class Api::ProfilesController < ApplicationController
     if @profile
       render :show, status: :ok
     else
-      render json: {
-        error: 'プロフィールは存在しません'
-      }, status: :not_found
+      render_error('errors.resources.profile.not_found', status: :not_found)
     end
   end
 
@@ -18,9 +16,7 @@ class Api::ProfilesController < ApplicationController
 
       head :created
     else
-      render json: {
-        error: 'プロフィールはすでに存在します'
-      }, status: :conflict
+      render_error('errors.resources.profile.already_exists', status: :conflict)
     end
   end
 
@@ -30,9 +26,7 @@ class Api::ProfilesController < ApplicationController
 
       head :no_content
     else
-      render json: {
-        error: 'プロフィールは存在しません'
-      }, status: :not_found
+      render_error('errors.resources.profile.not_found', status: :not_found)
     end
   end
 

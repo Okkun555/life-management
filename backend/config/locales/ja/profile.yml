@@ -1,0 +1,11 @@
+ja:
+  errors:
+    resources:
+      profile:
+        not_found: "プロフィールは存在しません。"
+        already_exists: "プロフィールはすでに存在します。"
+  activerecord:
+    attributes:
+      profile:
+        sex: "性別"
+        is_public: "プロフィールの公開設定"
