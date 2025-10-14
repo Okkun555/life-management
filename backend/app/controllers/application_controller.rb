@@ -3,7 +3,10 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate_user!
 
+  # MEMO: rescue_fromは後で書いたものが優先される
+  # 今後エラーを追加する場合も、StandardErrorは最上位に定義する
   rescue_from StandardError, with: :handle_standard_error
+  rescue_from ActiveRecord::RecordInvalid, with: :handle_validation_error
 
   attr_reader :current_user
 
@@ -39,6 +42,19 @@ class ApplicationController < ActionController::API
   # JWTを使った認証
   def authenticate_with_jwt
     # 本番環境用のロジックを追加する
+  end
+
+  def handle_validation_error(exception)
+    errors = exception.record.errors.map do |error|
+      {
+        field: error.attribute,
+        message: error.full_message
+      }
+    end
+    render json: {
+      message: '入力内容に不備があります',
+      errors: errors
+    }, status: :unprocessable_entity
   end
 
   def handle_standard_error

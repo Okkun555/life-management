@@ -11,7 +11,7 @@ RSpec.describe 'Api::Profiles', type: :request do
 
       it '404ステータスが返却される' do
         expect(response).to have_http_status(:not_found)
-        expect(response.parsed_body['message']).to eq('プロフィールは存在しません。')
+        expect(response.parsed_body['message']).to eq('プロフィールは存在しません')
       end
     end
 
@@ -40,23 +40,86 @@ RSpec.describe 'Api::Profiles', type: :request do
     let(:sex) { 1 }
     let(:is_public) { true }
 
-    context 'プロフィールが存在しない場合' do
-      before { subject }
+    context '正常なパラメータの場合' do
+      context 'プロフィールが存在しない場合' do
+        before { subject }
 
-      it '201ステータスが返却される' do
-        expect(response).to have_http_status(:created)
+        it '201ステータスが返却される' do
+          expect(response).to have_http_status(:created)
+        end
+      end
+
+      context 'プロフィールが存在する場合' do
+        before do
+          create(:profile, user:)
+          subject
+        end
+
+        it '422ステータスが返却される' do
+          expect(response).to have_http_status(:conflict)
+          expect(response.parsed_body['message']).to eq('プロフィールはすでに存在します')
+        end
       end
     end
 
-    context 'プロフィールが存在する場合' do
-      before do
-        create(:profile, user:)
-        subject
+    context '異常なパラメータの場合' do
+      before { subject }
+
+      context '生年月日の値が不正' do
+        context '未入力の場合' do
+          let(:birthday) { '' }
+
+          it '422ステータスとエラーメッセージが返却される' do
+            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response.parsed_body).to eq({
+                                                 'message' => '入力内容に不備があります',
+                                                 'errors' => [
+                                                   {
+                                                     'field' => 'birthday',
+                                                     'message' => '生年月日を入力してください'
+                                                   }
+                                                 ]
+                                               })
+          end
+        end
       end
 
-      it '422ステータスが返却される' do
-        expect(response).to have_http_status(:conflict)
-        expect(response.parsed_body['message']).to eq('プロフィールはすでに存在します。')
+      context '性別の値が不正' do
+        context '未入力の場合' do
+          let(:sex) { '' }
+
+          it '422ステータスとエラーメッセージが返却される' do
+            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response.parsed_body).to eq({
+                                                 'message' => '入力内容に不備があります',
+                                                 'errors' => [
+                                                   {
+                                                     'field' => 'sex',
+                                                     'message' => '性別を入力してください'
+                                                   }
+                                                 ]
+                                               })
+          end
+        end
+      end
+
+      context '公開設定の値が不正' do
+        context '未入力の場合' do
+          let(:is_public) { '' }
+
+          it '422ステータスとエラーメッセージが返却される' do
+            expect(response).to have_http_status(:unprocessable_entity)
+            expect(response.parsed_body).to eq({
+                                                 'message' => '入力内容に不備があります',
+                                                 'errors' => [
+                                                   {
+                                                     'field' => 'is_public',
+                                                     'message' => 'プロフィールの公開設定は一覧にありません'
+                                                   }
+                                                 ]
+                                               })
+          end
+        end
       end
     end
   end
@@ -88,7 +151,7 @@ RSpec.describe 'Api::Profiles', type: :request do
 
       it '422ステータスが返却される' do
         expect(response).to have_http_status(:not_found)
-        expect(response.parsed_body['message']).to eq('プロフィールは存在しません。')
+        expect(response.parsed_body['message']).to eq('プロフィールは存在しません')
       end
     end
   end
