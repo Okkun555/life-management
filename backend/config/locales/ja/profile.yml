@@ -10,3 +10,11 @@ ja:
         birthday: "生年月日"
         sex: "性別"
         is_public: "プロフィールの公開設定"
+    errors:
+      models:
+        profile:
+          attributes:
+            birthday:
+              less_than_or_equal_to: "は%{count}以前の日付にしてください"
+            is_public:
+              inclusion: "を設定しなおしてください"

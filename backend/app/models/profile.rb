@@ -1,4 +1,7 @@
 class Profile < ApplicationRecord
+  ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png].freeze
+
+  has_one_attached :avatar
   belongs_to :user
 
   validates :birthday, presence: true
@@ -7,7 +10,8 @@ class Profile < ApplicationRecord
   }
   validates :sex, presence: true
   validates :is_public, inclusion: { in: [true, false] }
-
+  validates :avatar, content_type: ACCEPTED_CONTENT_TYPES,
+                     size: { less_than: 10.megabytes }
   enum :sex, { secret: 0, man: 1, woman: 2 }
 
   # 年齢を整数で返す

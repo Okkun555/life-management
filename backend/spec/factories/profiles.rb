@@ -5,5 +5,15 @@ FactoryBot.define do
     is_public { true }
 
     association :user
+
+    trait :with_avatar do
+      after :build do |profile|
+        profile.avatar.attach(
+          io: Rails.root.join('spec/fixtures/files/sample_avatar.jpg').open,
+          filename: 'sample_avatar.jpg',
+          content_type: 'image/jpeg'
+        )
+      end
+    end
   end
 end

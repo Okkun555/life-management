@@ -33,7 +33,7 @@ class Api::ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:birthday, :sex, :is_public)
+    params.require(:profile).permit(:birthday, :sex, :is_public, :avatar)
   end
 
   def set_profile

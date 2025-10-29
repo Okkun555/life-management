@@ -72,4 +72,5 @@ RSpec.configure do |config|
   config.include RSpec::RequestDescriber, type: :request
   config.include FactoryBot::Syntax::Methods
   config.include ApiHelpers, type: :request
+  config.include ActiveSupport::Testing::TimeHelpers
 end
