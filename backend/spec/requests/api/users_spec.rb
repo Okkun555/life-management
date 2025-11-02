@@ -4,7 +4,7 @@ RSpec.describe 'Api::Users', type: :request do
   let(:user) { create(:user) }
   let!(:profile) { create(:profile, user:) }
 
-  describe 'GET /api/user' do
+  describe 'GET /api/users/me' do
     context 'ログイン済の場合' do
       before do
         login(user)

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
-    resource :user, only: [:show]
+    resources :users, only: [] do
+      collection do
+        get :me
+      end
+    end
     resource :profile, only: [:show, :create, :update]
 
     resources :todo_lists, only: [:index, :show, :create] do
