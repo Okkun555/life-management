@@ -10,14 +10,16 @@ class Api::ProfilesController < ApplicationController
   end
 
   def create
-    if current_user.profile.blank?
+    return render_error('errors.resources.profile.already_exists', status: :conflict) if current_user.profile.present?
+
+    ActiveRecord::Base.transaction do
+      current_user.update!(user_params)
+
       @profile = current_user.build_profile(profile_params)
       @profile.save!
-
-      head :created
-    else
-      render_error('errors.resources.profile.already_exists', status: :conflict)
     end
+
+    head :created
   end
 
   def update
@@ -31,6 +33,10 @@ class Api::ProfilesController < ApplicationController
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(:name)
+  end
 
   def profile_params
     params.require(:profile).permit(:birthday, :sex, :is_public, :avatar)

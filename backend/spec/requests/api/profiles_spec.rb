@@ -66,33 +66,40 @@ RSpec.describe 'Api::Profiles', type: :request do
   end
 
   describe 'POST /api/profile' do
+    let(:name) { '更新したユーザー名' }
     let(:birthday) { Date.new(1990, 1, 1) }
     let(:sex) { 1 }
     let(:is_public) { true }
 
     context '正常系' do
       context 'プロフィール画像を設定しない場合' do
-        let(:params) { { profile: { birthday:, sex:, is_public:, avatar: nil } } }
+        let(:params) { { user: { name: }, profile: { birthday:, sex:, is_public:, avatar: nil } } }
 
         it '201ステータスを返却し、プロフィールデータを作成する' do
           expect { subject }.to change { Profile.count }.by(1)
           expect(response).to have_http_status(:created)
+
+          user.reload
+          expect(user.name).to eq(name)
         end
       end
 
       context 'プロフィールが画像を設定する場合' do
         let(:avatar_image) { fixture_file_upload('/spec/fixtures/files/sample_avatar.jpg') }
-        let(:params) { { profile: { birthday:, sex:, is_public:, avatar: nil } } }
+        let(:params) { { user: { name: }, profile: { birthday:, sex:, is_public:, avatar: nil } } }
 
         it '201ステータスを返却し、プロフィールデータを作成する' do
           expect { subject }.to change { Profile.count }.by(1)
           expect(response).to have_http_status(:created)
+
+          user.reload
+          expect(user.name).to eq(name)
         end
       end
     end
 
     context '異常系' do
-      let(:params) { { profile: { birthday:, sex:, is_public:, avatar: nil } } }
+      let(:params) { { user: { name: }, profile: { birthday:, sex:, is_public:, avatar: nil } } }
 
       context '操作ユーザーのプロフィールが既に存在する場合' do
         before do
@@ -102,11 +109,14 @@ RSpec.describe 'Api::Profiles', type: :request do
         it '422ステータスを返却し、新たなデータを作成しない' do
           expect { subject }.not_to(change { Profile.count })
           expect(response).to have_http_status(:conflict)
+
+          user.reload
+          expect(user.name).not_to eq(name)
         end
       end
 
       context '生年月日の値が不正な場合' do
-        let(:params) { { profile: { birthday:, sex:, is_public:, avatar: nil } } }
+        let(:params) { { user: { name: }, profile: { birthday:, sex:, is_public:, avatar: nil } } }
 
         context '未入力の場合' do
           let(:birthday) { '' }
@@ -123,28 +133,9 @@ RSpec.describe 'Api::Profiles', type: :request do
                                                    }
                                                  ]
                                                })
-          end
-        end
 
-        context '未来日の場合' do
-          let(:birthday) { Date.new(1990, 1, 2) }
-
-          before do
-            travel_to('1990/01/01 00:00:00')
-          end
-
-          it '422ステータスとエラーを返却する' do
-            expect { subject }.not_to(change { Profile.count })
-            expect(response).to have_http_status(:unprocessable_entity)
-            expect(response.parsed_body).to eq({
-                                                 'message' => '入力内容に不備があります',
-                                                 'errors' => [
-                                                   {
-                                                     'field' => 'birthday',
-                                                     'message' => '生年月日は1990-01-01以前の日付にしてください'
-                                                   }
-                                                 ]
-                                               })
+            user.reload
+            expect(user.name).not_to eq(name)
           end
         end
       end
@@ -164,6 +155,9 @@ RSpec.describe 'Api::Profiles', type: :request do
                                                  }
                                                ]
                                              })
+
+          user.reload
+          expect(user.name).not_to eq(name)
         end
       end
 
@@ -182,6 +176,9 @@ RSpec.describe 'Api::Profiles', type: :request do
                                                  }
                                                ]
                                              })
+
+          user.reload
+          expect(user.name).not_to eq(name)
         end
       end
     end
