@@ -1,31 +1,60 @@
-import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import dayjs from "dayjs";
+import { useCallback } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { SexType } from "../../types";
+import { SexTypes, type SexType } from "@/features/profile/types";
+import { useCreateProfile } from "@/hooks/api/profile/useProfileApi";
+import { required } from "@/libs/zod/messages";
 
-type ProfileForm = {
+import type { Dayjs } from "dayjs";
+
+type ProfileFormValues = {
   name: string;
-  birthday: Date | null;
+  birthday: Dayjs | null;
   sex: SexType;
   isPublic: boolean;
-};
+} & FieldValues;
 
 export const useProfileForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProfileForm>({
+  const { control, handleSubmit, reset } = useForm<ProfileFormValues>({
     defaultValues: {
       name: "",
       birthday: null,
-      sex: "secret",
+      sex: SexTypes.secret,
       isPublic: false,
     },
+    resolver: zodResolver(profileSchema),
+    reValidateMode: "onSubmit",
   });
 
-  return {
-    register,
-    handleSubmit,
-    errors,
-  };
+  const { trigger } = useCreateProfile();
+  const onSubmit = useCallback(
+    async (data: ProfileFormValues) => {
+      await trigger({
+        user: {
+          name: data.name,
+        },
+        profile: {
+          birthday: data.birthday,
+          sex: data.sex,
+          isPublic: data.isPublic,
+        },
+      });
+      reset();
+    },
+    [trigger, reset],
+  );
+
+  return { control, handleSubmit, onSubmit };
 };
+
+const profileSchema = z.object({
+  name: z.string().min(1, { message: required("アカウント名") }),
+  birthday: z.custom<Dayjs | null>((val) => {
+    return val === null || dayjs.isDayjs(val);
+  }),
+  sex: z.enum(["secret", "man", "woman"]),
+  isPublic: z.boolean(),
+});

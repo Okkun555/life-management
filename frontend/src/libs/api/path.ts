@@ -1,6 +1,8 @@
 export const path = {
   // 共通
   me: "/users/me",
+  // プロフィール
+  createProfile: "/profile",
   // TODOリスト
   currentTodoList: "/todo_lists/latest",
   allTodoList: "/todo_lists",

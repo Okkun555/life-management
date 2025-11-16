@@ -6,10 +6,9 @@ import { TextField as MuiTextField } from "@/components/mui";
 import type { FieldWrapperPassThroughProps } from "@/components/forms/field-wrapper/FieldWrapper";
 
 export type TextFieldProps = {
-  fieldWrapper: FieldWrapperPassThroughProps
-  muiTextField?: MuiTextFieldProps
-  
-}
+  fieldWrapper: FieldWrapperPassThroughProps;
+  muiTextField?: MuiTextFieldProps;
+};
 
 /*
 MEMO:

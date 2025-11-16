@@ -1,22 +1,19 @@
-import { TextFieldController } from "@/components/forms/text-field";
-import { Box, Button } from "@/components/mui";
+import { Box, Stack, Button, TextField, DatePicker } from "@/components/mui-material";
 import { useProfileForm } from "@/features/profile/hooks/forms";
 
 export const ProfileForm = () => {
-  const { register, handleSubmit, errors } = useProfileForm();
+  const { control, handleSubmit, onSubmit } = useProfileForm();
 
   return (
-    <Box component="form">
-      <TextFieldController
-        registration={register("name")}
-        textField={{
-          fieldWrapper: { label: "アカウント名", errorMessage: errors.birthday?.message },
-        }}
-      />
+    <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Stack gap={3}>
+        <TextField name="name" label="アカウント名" control={control} fullWidth />
+        <DatePicker name="birthday" label="生年月日" control={control} />
 
-      <Button type="submit" variant="contained" color="secondary" size="large">
-        登録
-      </Button>
+        <Button type="submit" variant="contained" color="secondary">
+          登録
+        </Button>
+      </Stack>
     </Box>
   );
 };
