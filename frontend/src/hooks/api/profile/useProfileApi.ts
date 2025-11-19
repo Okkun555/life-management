@@ -1,13 +1,13 @@
 import useSWRMutation from "swr/mutation";
 
-import { postRequest } from "@/libs/api/fetcher";
+import { postRequestWithFile } from "@/libs/api/fetcher";
 import { path } from "@/libs/api/path";
 
 /**
  * プロフィールの作成
  */
 export const useCreateProfile = () => {
-  const { trigger, isMutating } = useSWRMutation(path.createProfile, postRequest, {
+  const { trigger, isMutating } = useSWRMutation(path.createProfile, postRequestWithFile, {
     onSuccess: () => {
       console.log("プロフィールキャッシュを再取得");
     },

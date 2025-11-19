@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   DatePicker,
+  FileUpload,
   SelectField,
   Stack,
   SwitchField,
@@ -34,6 +35,9 @@ export const ProfileRegister = () => {
           <TextField name="name" label="アカウント名" control={control} />
           <DatePicker name="birthday" label="生年月日" control={control} />
           <SelectField name="sex" label="性別" control={control} options={sexOptions} />
+
+          <FileUpload name="avatar" label="アイコン" control={control} />
+
           <Button variant="contained" color="secondary" type="submit">
             作成する
           </Button>

@@ -8,3 +8,4 @@ export {
   SwitchElement as SwitchField,
 } from "react-hook-form-mui";
 export { DatePicker } from "./DatePicker";
+export { FileUpload } from "./FileUpload";

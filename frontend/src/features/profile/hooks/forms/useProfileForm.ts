@@ -15,6 +15,7 @@ type ProfileFormValues = {
   birthday: Dayjs | null;
   sex: SexType;
   isPublic: boolean;
+  avatar?: File | null;
 } & FieldValues;
 
 export const useProfileForm = () => {
@@ -24,6 +25,7 @@ export const useProfileForm = () => {
       birthday: null,
       sex: SexTypes.secret,
       isPublic: false,
+      avatar: null,
     },
     resolver: zodResolver(profileSchema),
     reValidateMode: "onSubmit",
@@ -37,9 +39,10 @@ export const useProfileForm = () => {
           name: data.name,
         },
         profile: {
-          birthday: data.birthday,
+          birthday: data.birthday ? data.birthday.format("YYYY-MM-DD") : null,
           sex: data.sex,
           isPublic: data.isPublic,
+          avatar: data.avatar,
         },
       });
       reset();
@@ -57,4 +60,17 @@ const profileSchema = z.object({
   }),
   sex: z.enum(["secret", "man", "woman"]),
   isPublic: z.boolean(),
+  avatar: z
+    .custom<File | null>()
+    .optional()
+    .refine(
+      (file) => {
+        if (!file) return true;
+        const acceptedTypes = ["image/jpeg", "image/png"];
+        return acceptedTypes.includes(file.type);
+      },
+      {
+        message: "JPEGまたはPNG形式の画像を選択してください",
+      },
+    ),
 });
