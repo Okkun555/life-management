@@ -7,7 +7,11 @@ import { useFetchMe } from "@/hooks/api/common/useMe";
 
 export const Dashboard = () => {
   const router = useRouter();
-  // TODO: useFetchMeはヘッダー等で呼び出し→グローバルステートに保管。その値を見た方がいいかも
+  /**
+   * TODO:要検討
+   * meの値はグローバルステート保管した方がいいかも
+   * ヘッダ等でmeを叩いてグルーバルステートに格納、各コンポーネントではそれを見るとか？
+   */
   const { me } = useFetchMe();
 
   useEffect(() => {
@@ -18,7 +22,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div>ダッシュボード</div>
+      <div>このページはダッシュボード画面です。様々な情報を今後追加予定です。</div>
     </>
   );
 };
