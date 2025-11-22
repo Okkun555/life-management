@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_14_070341) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_22_060246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_14_070341) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "body_parts", force: :cascade do |t|
+    t.string "name", null: false, comment: "部位名"
+    t.string "ancestry", null: false, comment: "階層"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_body_parts_on_ancestry"
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.bigint "body_part_id", null: false
+    t.string "name", null: false, comment: "種目名"
+    t.string "description", comment: "説明"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["body_part_id"], name: "index_exercises_on_body_part_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "ユーザーID"
     t.date "birthday", null: false, comment: "生年月日"
@@ -64,5 +81,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_14_070341) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exercises", "body_parts"
   add_foreign_key "profiles", "users"
 end
