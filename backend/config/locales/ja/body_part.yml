@@ -1,0 +1,10 @@
+ja:
+  errors:
+    resources:
+      body_part:
+        parent_not_found: "指定された親部位が見つかりません"
+  activerecord:
+    attributes:
+      body_part:
+        attributes:
+          name:
