@@ -4,6 +4,10 @@ class BodyPart < ApplicationRecord
   belongs_to :user
   has_many :exercises, dependent: :destroy
 
+  def full_name
+    @full_name ||= ancestors.pluck(:name).push(name).join('/')
+  end
+
   class << self
     def create_with_ancestry!(parent_id:, name:, user:)
       attributes = { name:, user: }

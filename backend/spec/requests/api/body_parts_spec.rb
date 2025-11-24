@@ -7,6 +7,48 @@ RSpec.describe 'Api::BodyParts', type: :request do
     login(user)
   end
 
+  describe 'GET /api/body_parts' do
+    context '部位情報が存在しない場合' do
+      it '200ステータスと空配列を返却する' do
+        subject
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to eq([])
+      end
+    end
+
+    context '部位情報が存在する場合' do
+      # 親→子→孫の3階層データを作成
+      let!(:parent) { create(:body_part, name: '上半身', user:) }
+      let!(:child) { create(:body_part, name: '胸', parent:, user:) }
+      let!(:grandchild) { create(:body_part, name: '大胸筋上部', parent: child, user:) }
+
+      it '200ステータスと部位情報を配列で返却する' do
+        subject
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to eq([
+                                             {
+                                               'id' => parent.id,
+                                               'name' => parent.name,
+                                               'parent_id' => nil,
+                                               'full_name' => parent.name
+                                             },
+                                             {
+                                               'id' => child.id,
+                                               'name' => child.name,
+                                               'parent_id' => parent.id,
+                                               'full_name' => "#{parent.name}/#{child.name}"
+                                             },
+                                             {
+                                               'id' => grandchild.id,
+                                               'name' => grandchild.name,
+                                               'parent_id' => child.id,
+                                               'full_name' => "#{parent.name}/#{child.name}/#{grandchild.name}"
+                                             }
+                                           ])
+      end
+    end
+  end
+
   describe 'POST /api/body_parts' do
     context '階層が正常な場合' do
       context '親階層がない場合' do
