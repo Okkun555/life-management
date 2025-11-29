@@ -2,7 +2,6 @@ class BodyPart < ApplicationRecord
   has_ancestry
 
   belongs_to :user
-  has_many :exercises, dependent: :destroy
 
   def full_name
     @full_name ||= ancestors.pluck(:name).push(name).join('/')

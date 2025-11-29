@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :create, :update]
 
     # トレーニング記録関連
-    resources :body_parts, only: [:index, :create]
+    resources :body_parts, only: [:index, :create, :destroy]
 
     # TODO:良きタイミングで以下のルーティングと紐づくコードを全て削除する
     resources :todo_lists, only: [:index, :show, :create] do

@@ -88,4 +88,50 @@ RSpec.describe 'Api::BodyParts', type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/body_parts/:id' do
+    context '削除対象のデータが存在しない場合' do
+      let(:id) { 999_999 } # 存在しないID
+
+      it '404ステータスを返却する' do
+        expect { subject }.not_to(change { BodyPart.count })
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context '削除対象のデータが存在する場合' do
+      context '紐づく階層がない場合' do
+        let!(:body_part) { create(:body_part, user:) }
+        let(:id) { body_part.id }
+
+        it '200ステータスを返却し、データを削除する' do
+          expect { subject }.to change { BodyPart.count }.by(-1)
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context '紐づく階層がある場合' do
+        let!(:parent) { create(:body_part, user:) }
+        let!(:child) { create(:body_part, parent:, user:) }
+
+        context '削除対象が親の場合' do
+          let(:id) { parent.id }
+
+          it '200ステータスを返却し、親、子データを削除する' do
+            expect { subject }.to change { BodyPart.count }.by(-2)
+            expect(response).to have_http_status(:ok)
+          end
+        end
+
+        context '削除対象が子の場合' do
+          let(:id) { child.id }
+
+          it '200ステータスを返却し、子データのみ削除する' do
+            expect { subject }.to change { BodyPart.count }.by(-1)
+            expect(response).to have_http_status(:ok)
+          end
+        end
+      end
+    end
+  end
 end
