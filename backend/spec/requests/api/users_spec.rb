@@ -19,7 +19,8 @@ RSpec.describe 'Api::Users', type: :request do
                                              'has_profile' => true,
                                              'age' => profile.age,
                                              'sex' => profile.sex,
-                                             'is_public' => profile.is_public
+                                             'is_public' => profile.is_public,
+                                             'avatar_url' => nil
                                            })
       end
     end

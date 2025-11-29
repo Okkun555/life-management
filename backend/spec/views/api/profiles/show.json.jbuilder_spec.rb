@@ -20,7 +20,8 @@ RSpec.describe 'api/profiles/show.json.jbuilder', type: :view do
                                   'birthday' => profile.birthday.to_s,
                                   'age' => profile.age,
                                   'sex' => profile.sex,
-                                  'is_public' => profile.is_public
+                                  'is_public' => profile.is_public,
+                                  'avatar_url' => nil
                                 })
     end
   end

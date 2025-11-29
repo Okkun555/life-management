@@ -6,7 +6,7 @@ if profile.present?
   json.age profile.age
   json.sex profile.sex
   json.is_public profile.is_public
-  json.avatar profile.avatar.attached? ? rails_blob_url(profile.avatar) : nil
+  json.avatar_url profile.avatar.attached? ? rails_blob_url(profile.avatar) : nil
 else
   json.has_profile false
 end
