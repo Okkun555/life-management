@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_22_055928) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_29_115204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,8 +72,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_22_055928) do
     t.index ["supabase_uid"], name: "index_users_on_supabase_uid", unique: true
   end
 
+  create_table "workouts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "body_part_id", null: false
+    t.string "name", null: false, comment: "種目名"
+    t.string "description", comment: "説明"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["body_part_id"], name: "index_workouts_on_body_part_id"
+    t.index ["user_id", "name"], name: "index_workouts_on_user_id_and_name", unique: true
+    t.index ["user_id"], name: "index_workouts_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "body_parts", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "workouts", "body_parts"
+  add_foreign_key "workouts", "users"
 end
