@@ -80,7 +80,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_29_115204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body_part_id"], name: "index_workouts_on_body_part_id"
-    t.index ["user_id", "name"], name: "index_workouts_on_user_id_and_name", unique: true
+    t.index ["user_id", "body_part_id", "name"], name: "index_workouts_on_user_id_and_body_part_id_and_name", unique: true
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 

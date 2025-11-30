@@ -8,6 +8,6 @@ class CreateWorkouts < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :workouts, [:user_id, :name], unique: true
+    add_index :workouts, [:user_id, :body_part_id, :name], unique: true
   end
 end
