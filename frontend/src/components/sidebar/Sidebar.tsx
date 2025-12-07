@@ -1,7 +1,7 @@
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CalendarViewMonthIcon from "@mui/icons-material/CalendarViewMonth";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ListAltIcon from "@mui/icons-material/ListAlt";
+import SettingsIcon from "@mui/icons-material/Settings";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -33,9 +33,9 @@ const menuItems = [
     href: "/monthly-goal",
   },
   {
-    text: "TODO管理",
-    icon: <ListAltIcon />,
-    href: "/todo-list",
+    text: "マスター設定",
+    icon: <SettingsIcon />,
+    href: "/setting",
   },
 ];
 
